@@ -2,8 +2,8 @@
 
 ### Spis treści
 - [Liniowe modele w statystyce](#liniowe-modele-w-statystyce)
-  * [Ogolne modele liniowe (GLM) - estymacja parametrow i zastosowanie](#ogolne-modele-liniowe--glm----estymacja-parametrow-i-zastosowanie)
-  * [Mieszane modele liniowe (MLM) - estymacja parametrow i zastosowanie](#mieszane-modele-liniowe--mlm----estymacja-parametrow-i-zastosowanie)
+  * [Ogolne modele liniowe - estymacja parametrow i zastosowanie](#ogolne-modele-liniowe---estymacja-parametrow-i-zastosowanie)
+  * [Mieszane modele liniowe - estymacja parametrow i zastosowanie](#mieszane-modele-liniowe---estymacja-parametrow-i-zastosowanie)
 - [Jezyki Python i R](#jezyki-python-i-r)
   * [Porownanie efektywnosci, zastostowan i popularnosci](#porownanie-efektywnosci--zastostowan-i-popularnosci)
   * [Impementacja metod statystycznych](#impementacja-metod-statystycznych)
