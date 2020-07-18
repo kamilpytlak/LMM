@@ -1,5 +1,4 @@
 ## Liniowe modele mieszane (MLM): Porównanie efektywności algorytmów w językach Python i R
---- 
 
 ### Spis treści
 - [Liniowe modele w statystyce](#liniowe-modele-w-statystyce)
@@ -14,21 +13,18 @@
     + [Zbiór danych "cows"](#zbiór-danych--cows-)
   * [Wnioski](#wnioski)
 
----
 
 ### Liniowe modele w statystyce
----
+
 #### Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie
----
+
 #### Mieszane modele liniowe (MLM) - estymacja parametrów i zastosowanie
 
----
 
 ### Języki Python i R
 #### Porównanie efektywności, zastostowań i popularności
 #### Impementacja metod statystycznych
 
----
 
 ### Porównanie efektywności algorytmów MLM
 #### Metodyka
