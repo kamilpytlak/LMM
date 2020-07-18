@@ -10,7 +10,7 @@
 - [Porównanie efektywności algorytmów MLM](#porównanie-efektywności-algorytmów-mlm)
   * [Metodyka](#metodyka)
   * [Wyniki](#wyniki)
-    + [Zbiór danych "cows"](#zbiór-danych--cows-)
+    + [Zbiór danych "cows"](#zbiór-danych-"cows")
   * [Wnioski](#wnioski)
 
 
