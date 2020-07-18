@@ -2,16 +2,16 @@
 
 ### Spis treści
 - [Liniowe modele w statystyce](#liniowe-modele-w-statystyce)
-  * [Ogolne modele liniowe - estymacja parametrow i zastosowanie](#ogolne-modele-liniowe---estymacja-parametrow-i-zastosowanie)
-  * [Mieszane modele liniowe - estymacja parametrow i zastosowanie](#mieszane-modele-liniowe---estymacja-parametrow-i-zastosowanie)
+	- [Ogolne modele liniowe - estymacja parametrow i zastosowanie](#ogolne-modele-liniowe---estymacja-parametrow-i-zastosowanie)
+	- [Mieszane modele liniowe - estymacja parametrow i zastosowanie](#mieszane-modele-liniowe---estymacja-parametrow-i-zastosowanie)
 - [Jezyki Python i R](#jezyki-python-i-r)
-  * [Porownanie efektywnosci, zastostowan i popularnosci](#porownanie-efektywnosci--zastostowan-i-popularnosci)
-  * [Impementacja metod statystycznych](#impementacja-metod-statystycznych)
-- [Porownanie efektywności algorytmów MLM](#porownanie-efektywno-ci-algorytm-w-mlm)
-  * [Metodyka](#metodyka)
-  * [Wyniki](#wyniki)
-    + [Zbiór danych "cows"](#zbi-r-danych--cows-)
-  * [Wnioski](#wnioski)
+	- [Porownanie efektywnosci, zastostowan i popularnosci](#porownanie-efektywnosci-zastostowan-i-popularnosci)
+	- [Impementacja metod statystycznych](#impementacja-metod-statystycznych)
+- [Porownanie efektywności algorytmów MLM](#porownanie-efektywności-algorytmów-mlm)
+	- [Metodyka](#metodyka)
+	- [Wyniki](#wyniki)
+		- [Zbiór danych "cows"](#zbiór-danych-cows)
+	- [Wnioski](#wnioski)
 
 
 ### Liniowe modele w statystyce
