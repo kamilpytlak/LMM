@@ -2,12 +2,12 @@
 
 ### Spis treści
 - [Liniowe modele w statystyce](#liniowe-modele-w-statystyce)
-	- [Ogolne modele liniowe - estymacja parametrow i zastosowanie](#ogolne-modele-liniowe---estymacja-parametrow-i-zastosowanie)
-	- [Mieszane modele liniowe - estymacja parametrow i zastosowanie](#mieszane-modele-liniowe---estymacja-parametrow-i-zastosowanie)
-- [Jezyki Python i R](#jezyki-python-i-r)
-	- [Porownanie efektywnosci, zastostowan i popularnosci](#porownanie-efektywnosci-zastostowan-i-popularnosci)
+	- [Ogólne modele liniowe - estymacja parametrów i zastosowanie](#ogólne-modele-liniowe---estymacja-parametrów-i-zastosowanie)
+	- [Mieszane modele liniowe - estymacja parametrów i zastosowanie](#mieszane-modele-liniowe---estymacja-parametrów-i-zastosowanie)
+- [Języki Python i R](#języki-python-i-r)
+	- [Porównanie efektywności, zastostowaś i popularności](#porównanie-efektywności-zastostowaś-i-popularności)
 	- [Impementacja metod statystycznych](#impementacja-metod-statystycznych)
-- [Porownanie efektywności algorytmów MLM](#porownanie-efektywności-algorytmów-mlm)
+- [Porównanie efektywności algorytmów MLM](#porównanie-efektywności-algorytmów-mlm)
 	- [Metodyka](#metodyka)
 	- [Wyniki](#wyniki)
 		- [Zbiór danych "cows"](#zbiór-danych-cows)
