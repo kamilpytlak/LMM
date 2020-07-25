@@ -16,6 +16,7 @@ Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Pyth
 	- [Metodyka](#metodyka)
 	- [Wyniki](#wyniki)
 		- [Zbiór danych "cows"](#zbiór-danych-cows)
+		- [Symulacje](#symulacje)
 	- [Wnioski](#wnioski)
 
 
@@ -35,4 +36,5 @@ Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Pyth
 #### Metodyka
 #### Wyniki
 ##### Zbiór danych "cows"
+#### Symulacje
 #### Wnioski
