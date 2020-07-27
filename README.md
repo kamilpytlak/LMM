@@ -7,13 +7,13 @@ Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Pyth
 
 ### Spis treści
 1. [Liniowe modele w statystyce](#liniowe-modele-w-statystyce)
-	1.1 [Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie](#ogólne-modele-liniowe-glm---estymacja-parametrów-i-zastosowanie)
-	1.2 [Mieszane modele liniowe (MLM) - estymacja parametrów i zastosowanie](#mieszane-modele-liniowe-mlm---estymacja-parametrów-i-zastosowanie)
+	- [Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie](#ogólne-modele-liniowe-glm---estymacja-parametrów-i-zastosowanie)
+	- [Mieszane modele liniowe (MLM) - estymacja parametrów i zastosowanie](#mieszane-modele-liniowe-mlm---estymacja-parametrów-i-zastosowanie)
 2. [Języki Python i R](#języki-python-i-r)
-	2.1 [Porównanie efektywności, zastostowań i popularności](#porównanie-efektywności-zastostowań-i-popularności)
-	2.2 [Implementacja metod statystycznych](#implementacja-metod-statystycznych)
+	- [Porównanie efektywności, zastostowań i popularności](#porównanie-efektywności-zastostowań-i-popularności)
+	- [Implementacja metod statystycznych](#implementacja-metod-statystycznych)
 3. [Porównanie efektywności algorytmów MLM](#porównanie-efektywności-algorytmów-mlm)
-	3.1 [Metodyka](#metodyka)
+	- [Metodyka](#metodyka)
 	- [Wyniki](#wyniki)
 		- [Zbiór danych "cows"](#zbiór-danych-cows)
 			- [Opis zbioru danych](#opis-zbioru-danych)
