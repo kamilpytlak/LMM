@@ -6,6 +6,7 @@
 4. [RAM](#ram)
 5. [Rezultaty](#rezultaty)
 
+&nbsp;
 
 ### Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
@@ -40,8 +41,12 @@ Następujący model można zatem przedstawić w formie równania:
  -  <img src="https://render.githubusercontent.com/render/math?math=(1|cow.id)"> efektem losowym, 
  - <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> zakłóceniem losowym.
 
+&nbsp;
+
 ### Metodyka
 Porównania wielkości przeznaczanych zasobów systemowych na konstrukcję modelu zostały w językach Python i R zestawione z użyciem biblioteki "statsmodel" w języku Python (która umożliwia deklarację modelu za pomocą formuły bądź macierzy, więc uwzględniono te dwa aspekty) i bibliotek "lme4", "nlme" i "mgcv" w języku R. Biblioteki "lme4" i "nlme" są wysoce spopularyzowane i używane w celach estymacji współczynników, natomiast biblioteka "mgcv", a w szczególności funkcja "bam()" polecana jest do pracy nad dużymi zbiorami danych, gdyż w przeciwieństwie do "lme4" i "nlme", które do estymacji używają metody REML, ta korzysta z metody fREML (Functional Relationship Estimation by Maximum Likelihood). Sprawdzano średnie różnice czasów wykonywania pomiędzy językami, bibliotekami w obrębie języków i jednego języka, ilości przydzielanego RAMu na proces, a także w charakterze interpretacyjnym obszerność informacji i ich dokładność w rezultatach wywołań.
+
+&nbsp;
 
 #### Python
 W języku python skorzystano z biblioteki "statsmodel" w wersji 0.11.1. Biblioteka ta umożliwia deklarację modelu w postaci formuły i macierzy, więc obie metody zostały sprawdzone. Ponadto, w celu określenia macierzy, jak i podstawowych statystyk, zostały zaimportowane dodatkowe komponenty, takie jak biblioteka "pandas" w wersji 1.1.0, funkcja "dmatrices" z biblioteki "patsy" w wersji 0.5.1, funkcje "mean" i "stdev" będące podstawowymi statystykami opisującymi przeciętną wartość populacji (średnia) i odchylenie od średniej (odchylenie standardowe) z biblioteki "statistics" i biblioteka "time". W większości analizy przeprowadzane były z wykorzystaniem internetowej aplikacji Jupyter Notebook, w związku z czym dodatkowo zostały użyte "magiczne polecenia" IPython ("IPython Magic Commands") bazujące na jądrze IPython: "line_profiler" i "memory_profiler", które posłużyły do pomiarów kolejno czasu wykonywania i użytego RAMu. Część analiz (przede wszystkim sporządzenie wykresów zależności zużytej pamięci od czasu) została przeprowadzona w programie PyCharm.
@@ -87,6 +92,8 @@ def check_time(model, n):
 ```
 
 Szczegółowe analizy (wraz z wynikami) dla zbioru danych "cows" znaleźć można w pliku "Python.ipynb": [https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb).
+
+&nbsp;
 
 #### R
 W R do konstrukcji modelu użyto funkcji z dwóch najpopularniejszych bibliotek przeznaczonych do konstrukcji modeli mieszanych - "lme4" (funkcja "lmer()") w wersji 1.1-23 i "nlme" (funkcja "lme()") w wersji 3.1-148. W obu funkcjach modele zostały przedstawione w postaci formuły. Użyto ponadto biblioteki "mgcv" (funkcja "bam()") w wersji 1.8-31, która przeznaczona jest do operacji nad dużymi zbiorami danych. W celu efektywnego składowania i sprawnej obróbki danych, użyto również różne funkcje z bibliotek "dplyr" i "tidyr". Do pomiaru RAMu wykorzystana została biblioteka "profmem", a także wbudowany w program RStudio profiler.
@@ -144,18 +151,49 @@ check_RAM <- function(model) {
 ```
 Szczegółowe analizy (wraz z wynikami) dla zbioru danych "cows" znaleźć można w pliku "R.ipynb": [https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb).
 
+&nbsp;
+
 #### Metody statystyczne
 Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wykorzystaniem bibliotek "dplyr", "ggplot2" i "FSA". W oparciu o wykresy pudełkowe, zestawiono czas wykonywania funkcji wszystkich bibliotek i deklaracji obydwu języków, a także pojedyncze dla każdego języka i poszczególnych kombinacji bibliotek. Porównano średnie czasy konstrukcji modelu za pomocą deklaracji formuły i macierzy w języku Python z wykorzystaniem testu Wilcoxona, ponieważ przeprowadzony test Shapiro-Wilka stwierdził, że rozkład wartości deklaracji formuły nie jest normalny. Porównano także średnie czasy wszystkich bibliotek/deklaracji w obrębie dwóch języków, przeprowadzając test Kruskala-Wallisa, a w celu uzyskania szczegółów - Dunneta.
 
+&nbsp;
+
 ### Czas wykonania
+
+&nbsp;
+
 #### Python
+
+&nbsp;
+
 #### R
+
+&nbsp;
+
 
 ### RAM
+
+&nbsp;
+
 #### Python
+
+&nbsp;
+
 #### R
 
+&nbsp;
+
+
 ### Rezultaty
+
+&nbsp;
+
 #### Python
+
+&nbsp;
+
 #### R
+
+&nbsp;
+
 #### Ogólne
