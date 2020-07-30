@@ -163,6 +163,7 @@ Dla wszystkich badanych możliwości obydwu języków czasy wykonania zebrano dl
 
 ### 2.1 Python
 *Szczegółowe analizy dot. czasu wykonywania w języku Python: [https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb)*
+
 W pętli 100-krotnie zebrano czasy wykonywania konstrukcji modelu z deklaracją formuły i macierzy, a wartości zaokrąglono do 4 miejsc po przecinku i kolumnowo zapisano w pliku "times_cows.csv", w którym w 1. kolumnie znajdują się czasy wykonywania dla formuły, a w 2. - macierzy.
 
 Ogląd 6. pierwszych czasów wykonywania:
@@ -177,8 +178,8 @@ Ogląd 6. pierwszych czasów wykonywania:
 
 Bazując na pomiarach, oszacowano przeciętną wartość i odchylenie standardowe. **Dla deklaracji modelu za pomocą formuły średnia wynosiła 0.6765 sek., odchylenie standardowe - 0.0744 sek. a dla macierzy - średnia: 0.6242 sek., a odchylenie standardowe - 0.0289 sek.** 
 
-Rozrzut wartości wraz z ich zagęszczeniem i zaznaczeniem median znaleźć można na poniższym wykresie:
-![Rozrzut czasów wykonywania modelu w zależności od jego konstrukcji](https://i.imgur.com/0AkZ8po.png)
+Rozrzut wartości wraz z ich zagęszczeniem i zaznaczeniem median zilustrowano:
+![Wykres rozrzutu czasów wykonywania modelu w zależności od jego konstrukcji dla języka Python](https://i.imgur.com/0AkZ8po.png)
 
 Ze względu na zbliżone do siebie średnie czasy oczekiwania obu deklaracji, postanowiono sprawdzić, czy różnią się one istotnie. Z racji tego, że rozkład czasów wykonywania metody "formula" nie jest normalny (p-value = 9.33e-08), wykonano test Wilcoxona. Założono hipotezę, że czasy nie różnią się przeciwko hipotezie, że czas wykonywania konstrukcji modelu metodą "formula" jest większy niż "matrix".
 
@@ -193,9 +194,76 @@ alternative hypothesis: true location shift is greater than 0
 
 **Zatem dla analizowanego zbioru danych o wielkości 1000 obserwacji z dwoma efektami stałymi i jednym losowym sposób konstrukcji za pomocą macierzy jest szybszy niż za pomocą formuły, co odrzuca hipotezę o równości obu średnich.**
 
+Czasy zostały również jednostkowo zmierzone za pomocą "IPython Magic Commands" w Jupyter Notebook: %timeit, odpowiednio dla deklaracji formułą:
+```python
+Timer unit: 1e-07 s
+
+Total time: 1.08764 s
+File: <ipython-input-3-55d36bd81f50>
+Function: LMM at line 1
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     1                                           def LMM(model):
+     2         1        127.0    127.0      0.0      if model == "formula":
+     3         1     326454.0 326454.0      3.0          LMM_formula = smf.mixedlm(formula, data_set, groups=groups)
+     4         1   10549835.0 10549835.0     97.0          LMMF_formula = LMM_formula.fit()
+     5         1         28.0     28.0      0.0          return LMMF_formula
+     6                                           
+     7                                               elif model == "matrix":
+     8                                                   LMM_matrix = sm.MixedLM(y, X, groups=groups)
+     9                                                   LMMF_matrix = LMM_matrix.fit()
+    10                                                   return LMMF_matrix
+```
+
+i macierzy:
+```python
+Timer unit: 1e-07 s
+
+Total time: 0.973522 s
+File: <ipython-input-3-55d36bd81f50>
+Function: LMM at line 1
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     1                                           def LMM(model):
+     2         1         27.0     27.0      0.0      if model == "formula":
+     3                                                   LMM_formula = smf.mixedlm(formula, data_set, groups=groups)
+     4                                                   LMMF_formula = LMM_formula.fit()
+     5                                                   return LMMF_formula
+     6                                           
+     7         1          9.0      9.0      0.0      elif model == "matrix":
+     8         1     169398.0 169398.0      1.7          LMM_matrix = sm.MixedLM(y, X, groups=groups)
+     9         1    9565761.0 9565761.0     98.3          LMMF_matrix = LMM_matrix.fit()
+    10         1         26.0     26.0      0.0          return LMMF_matrix
+```
+
+**Aż 97% czasu w przypadku formuły i 98.3% w przypadku macierzy składa się na dopasowanie modelu**, czyli oszacowanie macierzy kowariancji i reszt, zatem **przypuszcza się, że proces ten jest wymagający nie tylko pod względem czasowym, ale możliwe, że także i pod względem używanej pamięci operacyjne**j, ponieważ na samo "teoretyczne" określenie modelu (tu za pomocą "smf.mixedlm()" i "sm.MixedLM()") zużywane jest tylko odpowiednio 3% i 1.7% całości czasu.
+
 ### 2.2 R
 *Szczegółowe analizy dot. czasu wykonywania w języku R:* [https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb)
 
+W pętli 100-krotnie zebrano czasy wykonywania konstrukcji modelu z wykorzystaniem odpowiednich funkcji z popularnych bibliotek "lme4" (funkcja "lmer()") i "nlme" (funkcja "lme()"), jak i przeznaczonej do pracy nad dużymi zbiorami danych funkcji "bam()" z biblioteki "mgcv", a wartości zaokrąglono do 4 miejsc po przecinku i kolumnowo zapisano w pliku “times_cows.csv”, w którym w 3. kolumnie znajdują się czasy wykonywania dla biblioteki "lme4", w 4. - "nlme", a w 5. - "mgcv".
+
+Ogląd 6. pierwszych pomiarów:
+|  lme4 |  nlme |   bam  |
+|:-----:|:-----:|:------:|
+| 0.034 | 0.054 | 1.8668 |
+| 0.027 | 0.054 | 1.8926 |
+| 0.026 | 0.053 | 1.9927 |
+| 0.026 | 0.053 | 1.8993 |
+| 0.029 | 0.053 | 1.9611 |
+| 0.029 | 0.053 | 1.9931 |
+
+Bazując na pomiarach, oszacowano przeciętną wartość i odchylenie standardowe. **Dla konstrukcji modelu za pomocą biblioteki "lme4" średnia wyniosła 0.0282 sek., odchylenie standardowe - 0.0025 sek., "nlme" - średnia: 0.0551 sek., odchylenie standardowe: 0.0041 sek., a "bam" - średnia: 2.0296 sek., odchylenie standardowe - 0.2192 sek.**
+
+Rozrzut wartości wraz z ich zagęszczeniem i zaznaczeniem median zilustrowano:
+![Wykres rozrzutu czasów wykonywania modelu w zależności od jego konstrukcji dla języka R](https://i.imgur.com/jECbdBd.png)
+
+Wykres pudełkowy wyraźnie uwidacznia dużą rozbieżność pomiędzy czasami wykonywania bibliotek "lme4", "nlme" a "mgcv". Aby graficznie uchwycić różnice pomiędzy bibliotekami "lme4" a "nlme", które na tym wykresie nie dają się zauważyć, stworzono kolejny wykres, uwzględniający jedynie te biblioteki:
+![Wykres rozrzutu czasów wykonywania modelu w zależności od jego konstrukcji dla języka R](https://i.imgur.com/8Q6lgcM.png)
+
+Różnice dają się zauważyć - **czasy wykonywania dla biblioteki "lme4" wahają się pomiędzy 0.025 a 0.035 sek., natomiast dla biblioteki "nlme" - ok. 0.05 aż do ok. 0.075 sek.** 
 
 ## 3. RAM
 ### 3.1 Python
