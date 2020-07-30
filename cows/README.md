@@ -37,7 +37,9 @@ Następujący model można zatem przedstawić w formie równania:<br />
 <br />
 
 ### 1.1 Estymacja metodą REML
-*Szczegółowe analizy dot. estymacji metodą REML:* <br />
+*Szczegółowe analizy dot. estymacji metodą REML:*
+- w języku Python: [https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb),
+- w języku R: <br />
 <br />
 #### 1.1.1 Efekty stałe<br />
 **> R**<br />
@@ -154,50 +156,30 @@ _Oceny efektów losowych z wykorzystaniem deklaracji macierzy:_
 <br />
 
 
-### 1.2 Estymacja metodą ML
-*Szczegółowe analizy dot. estymacji metodą ML:*<br />
-<br />
-**> R**
-<br />
-Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstawiają się następująco: 
-|             |  model_lm (LM) | model_lme4 (LM) | model_nlme (LM) | model_mgcv (LM) |
-|:-----------:|:---------:|:----------:|:----------:|:---------:|
-| (Intercept) | 7770.0000 |  6699.4450 |  6699.4450 | 6699.4450 |
-|   btn3a12   | -328.6617 |  -244.0528 |  -244.0527 | -244.0528 |
-|  lactation2 | 1253.3234 |  1307.0553 |  1307.0553 | 1307.0553 |
-|  lactation3 | 1856.3374 |  1800.5067 |  1800.5067 | 1800.5067 |
-|  lactation4 | 1856.6869 |  1669.1736 |  1669.1736 | 1669.1736 |
-
-<br />
-
 ## 2. Czas wykonania
 
-&nbsp;
 
 ### 2.1 Python
-
-&nbsp;
+*Szczegółowe analizy dot. czasu wykonywania w języku Python: [https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb)*
 
 ### 2.2 R
-
-&nbsp;
+*Szczegółowe analizy dot. czasu wykonywania w języku R:*
 
 
 ## 3. RAM
-
 ### 3.1 Python
+*Szczegółowe analizy dot. użytego RAMu w języku Python:* [https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb)
 
 
 ### 3.2 R
-
+*Szczegółowe analizy dot. użytego RAMu w języku R:*
 
 
 ## 4. Wnioski
-
 ### 4.1 Interpretacja modeli - Python i R
-Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood). Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
+Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML: [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie).
 
-Zestawiając wyniki efektów stałych dla mieszanych modeli liniowych z użyciem REML i ML, można zauważyć, że te uzyskane za pomocą ML mają większe obciążenie. Różnica w rezultatach dawanych przez funkcje bibliotek "lme4" i "nlme" tkwi w sposobie przedstawienia istotności wyników - biblioteka "lme4" nie dostarcza wartości p, a samą wartość t z powodu trudności w szacunkach w konfrontacji z obecnym w modelu przynajmniej jednym efektem losowym. W tym celu wartość p można oszacować, wykorzystując różne metody, jak np. test ilorazu wiarygodności, test permutacyjny czy **test Walda**:
+Różnica w rezultatach dostarczanych przez funkcje bibliotek "lme4" i "nlme" tkwi w sposobie przedstawienia istotności wyników - biblioteka "lme4" nie dostarcza wartości p, a samą wartość t z powodu trudności w szacunkach w konfrontacji z obecnym w modelu przynajmniej jednym efektem losowym. W tym celu wartość p można oszacować, wykorzystując różne metody, jak np. test ilorazu wiarygodności, test permutacyjny czy **test Walda**:
 ```r
 coeff <- summary(LMM("lme4"))$coefficients
 p_value <- round(2 * (1 - pnorm(abs(coeff[, 3]))), 3)
