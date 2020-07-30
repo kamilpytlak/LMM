@@ -6,6 +6,7 @@
 3. [RAM](#3-ram)
 4. [Wnioski](#4-wnioski)<br />
 <br />
+
 ## 1. Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
  - 409 osobników, nad którymi zastosowano powtarzalne pomiary; o unikalnych identyfikatorach zgrupowanych w kolumnie **"cow.id"**,
