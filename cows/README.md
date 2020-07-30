@@ -110,10 +110,7 @@ _Oceny efektów stałych z wykorzystaniem deklaracji macierzy:_
 <br />
 
 
-**1.1.2 Efekty losowe**
-
-<br />
-
+**1.1.2 Efekty losowe**<br />
 **> R**
 <br />
 _Oceny efektów losowych z wykorzystaniem biblioteki “lme4”:_
@@ -157,11 +154,9 @@ _Oceny efektów losowych z wykorzystaniem deklaracji macierzy:_
 <br />
 
 
-#### 1.2 Estymacja metodą ML
-*Szczegółowe analizy dot. estymacji metodą ML:*
-
+### 1.2 Estymacja metodą ML
+*Szczegółowe analizy dot. estymacji metodą ML:*<br />
 <br />
-
 **> R**
 <br />
 Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstawiają się następująco: 
