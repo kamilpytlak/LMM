@@ -1,10 +1,10 @@
 
 # Zbiór danych "cows"
 
-1. [Opis zbioru danych](#opis-zbioru-danych)
-2. [Czas wykonania](#czas-wykonania)
-3. [RAM](#ram)
-4. [Rezultaty](#rezultaty)
+1. [Opis zbioru danych](#1-opis-zbioru-danych)
+2. [Czas wykonania](#2-czas-wykonania)
+3. [RAM](#3-ram)
+4. [Rezultaty](#4-rezultaty)
 
 <br />
 
