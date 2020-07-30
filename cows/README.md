@@ -6,7 +6,6 @@
 3. [RAM](#ram)
 4. [Rezultaty](#rezultaty)
 
-&nbsp;
 
 ## Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
@@ -31,9 +30,8 @@ Sprawdzano, czy obserwowana mutacja (kolumna "btn3a1") ma wpływ na wydajność 
 
 Następujący model można zatem przedstawić w formie równania:
 
-<center>
+
 <img src="https://render.githubusercontent.com/render/math?math=y_{milk} = X_{btn3a1} * \beta_{btn3a1} %2B X_{lactation} * \beta_{lactation} %2B Z_{cow.id} * u_{cow.id} %2B \epsilon">
-</center>
 
 , w którym:
 
@@ -47,7 +45,6 @@ Następujący model można zatem przedstawić w formie równania:
 ### Interpretacja
 Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood), gdyż przekształcając dane nie dokonuje szacunków na pełnym zestawie parametrów, w związku z czym głównie przeznaczona jest do szacunków komponentów wariancyjnych. Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
 
-
 #### Estymacja metodą REML
 *Szczegółowe analizy dot. estymacji metodą REML:* 
 
@@ -55,7 +52,6 @@ Model został poddany interpretacji w oparciu o porównanie wartości estymator�
 **Efekty stałe**
 
 **R**
-
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
 |             |  model_lm (LM) | model_lme4 (REML) | model_nlme (REML) | model_mgcv (REML) |
 |:-----------:|:---------:|:----------:|:----------:|:---------:|
@@ -66,6 +62,7 @@ Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodno�
 |  lactation4 | 1856.6869 |  1669.2723 |  1669.2723 | 1669.2723 |
 
 W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu i poziomy laktacji, natomiast w następnych kolejno: klasyczny model liniowy, model mieszany z użyciem biblioteki lme4, model mieszany z użyciem biblioteki nlme, model mieszany z użyciem biblioteki mgcv.
+
 
 
 *Oceny efektów stałych z wykorzystaniem biblioteki "lme4":*
@@ -112,7 +109,6 @@ _Oceny efektów stałych z wykorzystaniem deklaracji formuły:_
 | lactation[T.4] | 1669.271 |  177.492 |  9.405 |  0.000  | 1321.394 | 2017.148 |
 
 
-
 _Oceny efektów stałych z wykorzystaniem deklaracji macierzy:_
 |                |   Coef.  | Std.Err. |    z   | P>\|z\| |  [0.025  |  0.975]  |
 |:--------------:|:--------:|:--------:|:------:|:-------:|:--------:|:--------:|
@@ -124,19 +120,16 @@ _Oceny efektów stałych z wykorzystaniem deklaracji macierzy:_
 
 
 
+
+
 **Efekty losowe**
 
 **R**
-
-
 _Oceny efektów losowych z wykorzystaniem biblioteki “lme4”:_
 |  Groups  |     Name    | Variance | Std.Dev. |
 |:--------:|:-----------:|:--------:|:--------:|
 |  cow.id  | (Intercept) |  1240403 |   1114   |
 | Residual |             |  1252911 |   1119   |
-
-
-
 
 _Oceny efektów losowych z wykorzystaniem biblioteki “nlme”:_
 
@@ -146,30 +139,19 @@ Random effects:
 |:-------:|:-----------:|:--------:|
 | StdDev: |   1113.734  | 1119.335 |
 
-
-
-
 _Oceny efektów losowych z wykorzystaniem biblioteki “mgcv”:_
 |           |  edf  | Ref.df |   F   | p-value |     |
 |:---------:|:-----:|:------:|:-----:|:-------:|:---:|
 | s(cow.id) | 277.4 |   407  | 2.351 |  <2e-16 | *** |
-
-
-
 
 **Python**
 _Oceny efektów losowych z wykorzystaniem deklaracji formuły:_
 | Group Var | 1240396.526 | 147.330 |
 |:---------:|:-----------:|:-------:|
 
-
-
-
 _Oceny efektów losowych z wykorzystaniem deklaracji macierzy:_
 | Group Var | 1240396.526 | 147.330 |
 |:---------:|:-----------:|:-------:|
-
-
 
 #### Estymacja metodą ML
 *Szczegółowe analizy dot. estymacji metodą ML:*
@@ -185,7 +167,33 @@ Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstaw
 |  lactation3 | 1856.3374 |  1800.5067 |  1800.5067 | 1800.5067 |
 |  lactation4 | 1856.6869 |  1669.1736 |  1669.1736 | 1669.1736 |
 
-#### Wnioski
+
+
+## Czas wykonania
+
+&nbsp;
+
+### Python
+
+&nbsp;
+
+### R
+
+&nbsp;
+
+
+## RAM
+
+### Python
+
+
+### R
+
+
+
+## Rezultaty
+
+### Interpretacja modeli
 Metoda REML zapewnia estymatory mniej obciążone niż metoda ML w przypadku mieszanych modeli liniowych - zestawiając wyniki efektów stałych dla mieszanych modeli liniowych z użyciem REML i ML, można zauważyć, że te uzyskane za pomocą ML mają większe obciążenie. Różnica w rezultatach dawanych przez funkcje bibliotek "lme4" i "nlme" tkwi sposobie przedstawienia istotności wyników - biblioteka "lme4" nie zapewnia p-value, a samą t-value z powodu trudności w oszacowaniu w obecności efektów losowych. W tym celu wartość p można oszacować, wykorzystując różne metody, jak np. test ilorazu wiarygodności, test permutacyjny czy test Walda, korzystając z dostarczanej przez rezultat modelu wartości t i aproksymacji do rozkładu normalnego:
 ```r
 coeff <- summary(LMM("lme4"))$coefficients
@@ -216,42 +224,15 @@ confint(LMM("lme4"))
 
 Zarówno biblioteka "statsmodel" w języku Python (formuła + macierze), jak i wszystkie rozpatrywane biblioteki języka R dają porównywalne wyniki, których różnica tkwi w resztach ułamkowych, co jest związane z zaokrąglaniem liczb. Rozpatrując uzyskane wyniki pod kątem statystycznym, można dojść do wniosku, że wszystkie z rozpatrywanych parametrów (efekty stałe + jeden losowy) mają istotny wpływ na produkcję mleczną osobników, z wyłączeniem parametru "btn3a1", którego wartość p jest większa niż 0.05. Wariancja efektu losowego oceniona została na ok. 12404, natomiast dostarczona poprzez funkcję "bam()" biblioteki "mgcv" w R wartość p wskazuje na istotne różnice pomiędzy krowami w produkcji mlecznej w badanej populacji (p-value < 2e-16).
 
-## Czas wykonania
-
-&nbsp;
 
 ### Python
+
+#### Czas wykonania
+#### RAM
 
 &nbsp;
 
 ### R
 
-&nbsp;
-
-
-## RAM
-
-&nbsp;
-
-### Python
-
-&nbsp;
-
-### R
-
-&nbsp;
-
-
-## Rezultaty
-
-&nbsp;
-
-### Python
-
-&nbsp;
-
-### R
-
-&nbsp;
-
-### Ogólne
+#### Czas wykonania
+#### RAM
