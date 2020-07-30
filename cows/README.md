@@ -44,17 +44,14 @@ Następujący model można zatem przedstawić w formie równania:
 
 <br />
 
-### Interpretacja
-Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood), gdyż przekształcając dane nie dokonuje szacunków na pełnym zestawie parametrów, w związku z czym głównie przeznaczona jest do szacunków komponentów wariancyjnych. Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
-
 <br />
 
-#### Estymacja metodą REML
+### Estymacja metodą REML
 *Szczegółowe analizy dot. estymacji metodą REML:* 
 
 <br />
 
-**Efekty stałe**
+#### Efekty stałe
 
 <br />
 
@@ -107,9 +104,7 @@ W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu 
 <br />
 
 **Python**
-
 <br />
-
 _Oceny efektów stałych z wykorzystaniem deklaracji formuły:_
 |                |   Coef.  | Std.Err. |    z   | P>\|z\| |  [0.025  |  0.975]  |
 |:--------------:|:--------:|:--------:|:------:|:-------:|:--------:|:--------:|
@@ -223,6 +218,8 @@ Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstaw
 ## Rezultaty
 
 ### Interpretacja modeli
+Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood), gdyż przekształcając dane nie dokonuje szacunków na pełnym zestawie parametrów, w związku z czym głównie przeznaczona jest do szacunków komponentów wariancyjnych. Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
+
 Metoda REML zapewnia estymatory mniej obciążone niż metoda ML w przypadku mieszanych modeli liniowych - zestawiając wyniki efektów stałych dla mieszanych modeli liniowych z użyciem REML i ML, można zauważyć, że te uzyskane za pomocą ML mają większe obciążenie. Różnica w rezultatach dawanych przez funkcje bibliotek "lme4" i "nlme" tkwi sposobie przedstawienia istotności wyników - biblioteka "lme4" nie zapewnia p-value, a samą t-value z powodu trudności w oszacowaniu w obecności efektów losowych. W tym celu wartość p można oszacować, wykorzystując różne metody, jak np. test ilorazu wiarygodności, test permutacyjny czy test Walda, korzystając z dostarczanej przez rezultat modelu wartości t i aproksymacji do rozkładu normalnego:
 ```r
 coeff <- summary(LMM("lme4"))$coefficients
