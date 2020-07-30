@@ -17,8 +17,6 @@ Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym kompo
  - roczny udój w kilogramach mleka (kg/rok) - zgrupowane w kolumnie "**milk**",
  - ilość tłuszczu w zebranym mleku (w kg) - zgrupowane w kolumnie "**fat**".
 
-&nbsp;
-
 Ogląd 6. pierwszych obserwacji:
 | cow.id | btn3a1 | lactation | milk | fat |
 |:------:|:------:|:---------:|:----:|:---:|
@@ -28,6 +26,7 @@ Ogląd 6. pierwszych obserwacji:
 |    3   |    1   |     2     | 8564 | 331 |
 |    3   |    1   |     3     | 8621 | 330 |
 |    4   |    1   |     1     | 9536 | 365 |
+
 &nbsp;
 
 Sprawdzano, czy obserwowana mutacja (kolumna "btn3a1") ma wpływ na wydajność mleczną krów (kolumna "milk"). Z racji tego, że wśród tych samych osobników pomiary były powtarzane wielokrotnie, a przedmiotem analiz jest zbadanie zmienności pomiędzy osobnikami niż same wartości ich efektów, **efekt osobniczy (kolumna "cow.id") potraktowany został jako efekt losowy**. Przykładowy zbiór danych jest względnie niewielkim wycinkiem całej populacji krów z badanymi cechami, więc uwzględnienie tego efektu jako efektu stałego wiązałoby się z dodaniem do modelu 409 zmiennych niezależnych, a dodatkowo nie są znane poszczególne wartości parametrów pozostałych osobników, ponieważ niemożliwym jest zebranie ich w komplecie ze względu na wielkość całej populacji (co tyczy się zresztą niemal każdego badania statystycznego). **Jako efekty stałe potraktowane zostały genotyp (kolumna "btn3a1", o wartościach "1" lub "2") i numer laktacji (kolumna "lactation", o wartościach całkowitych od "1" do "4")**.
@@ -50,6 +49,7 @@ Następujący model można zatem przedstawić w formie równania:
 
 ### Interpretacja
 Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood), gdyż przekształcając dane nie dokonuje szacunków na pełnym zestawie parametrów, w związku z czym głównie przeznaczona jest do szacunków komponentów wariancyjnych. Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
+
 &nbsp;
 
 #### Estymacja metodą REML
@@ -58,6 +58,7 @@ Model został poddany interpretacji w oparciu o porównanie wartości estymator�
 &nbsp;
 
 **Efekty stałe**
+&nbsp;
 
 **R**
 &nbsp;
@@ -136,7 +137,9 @@ _Oceny efektów stałych z wykorzystaniem deklaracji macierzy:_
 
 **Efekty losowe**
 &nbsp;
+
 **R**
+
 &nbsp;
 
 _Oceny efektów losowych z wykorzystaniem biblioteki “lme4”:_
@@ -182,6 +185,7 @@ _Oceny efektów losowych z wykorzystaniem deklaracji macierzy:_
 #### Estymacja metodą ML
 *Szczegółowe analizy dot. estymacji metodą ML:*
 
+&nbsp;
 
 **R**
 &nbsp;
@@ -250,7 +254,7 @@ confint(LMM("lme4"))
 |  lactation3 | 1599.8628 | 2000.412 |
 |  lactation4 | 1320.4705 | 2015.552 |
 
-Zarówno biblioteka "statsmodel" w języku Python (formuła + macierze), jak i wszystkie rozpatrywane biblioteki języka R dają porównywalne wyniki, których różnica tkwi w resztach ułamkowych, co jest związane z zaokrąglaniem liczb. Rozpatrując uzyskane wyniki pod kątem statystycznym, można dojść do wniosku, że wszystkie z rozpatrywanych parametrów (efekty stałe + jeden losowy) mają istotny wpływ na produkcję mleczną osobników, z wyłączeniem parametru "btn3a1", którego wartość p jest większa niż 0.05. Wariancja efektu losowego oceniona została na ok. 12404, natomiast dostarczona poprzez funkcję "bam()" biblioteki "mgcv" w R wartość p wskazuje na istotne różnice pomiędzy krowami w produkcji mlecznej w badanej populacji (p-value < 2e-16).
+Zarówno biblioteka "statsmodel" w języku Python (formuła + macierze), jak i wszystkie rozpatrywane biblioteki języka R dają porównywalne wyniki, w których różnica tkwi w resztach, co jest związane z zaokrąglaniem liczb. Rozpatrując uzyskane wyniki pod kątem statystycznym, można dojść do wniosku, że wszystkie z analizowanych parametrów (efekty stałe + jeden efekt losowy) mają istotny wpływ na produkcję mleczną osobników, z wyłączeniem parametru "btn3a1", którego wartość p jest większa niż 0.05. Wariancja efektu losowego oceniona została na ok. 12404, natomiast dostarczona poprzez funkcję "bam()" biblioteki "mgcv" w R wartość p wskazuje na istotne różnice pomiędzy krowami w produkcji mlecznej w badanej populacji (p-value < 2e-16).
 
 
 ### Python
