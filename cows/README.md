@@ -2,10 +2,16 @@
 # Zbiór danych "cows"
 
 1. [Opis zbioru danych](#1-opis-zbioru-danych)
+1.1 [Estymacja metodą REML](#1-1-estymacja-metoda-reml)
+1.2 [Estymacja metodą ML](#1-2-estymacja-metoda-ml)
 2. [Czas wykonania](#2-czas-wykonania)
+2.1 [Python](#2-1-python)
+2.2 [R](#2-2-r)
 3. [RAM](#3-ram)
-4. [Rezultaty](#4-rezultaty)<br />
-
+3.1 [Python](#3-1-python)
+3.2 [R](#3-2-r)
+5. [Wnioski](#4-wnioski)<br />
+<br />
 ## 1. Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
  - 409 osobników, nad którymi zastosowano powtarzalne pomiary; o unikalnych identyfikatorach zgrupowanych w kolumnie **"cow.id"**,
@@ -192,26 +198,25 @@ Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstaw
 
 
 
-## 4. Rezultaty
+## 4. Wnioski
 
 ### 4.1 Interpretacja modeli - Python i R
-Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood), gdyż przekształcając dane nie dokonuje szacunków na pełnym zestawie parametrów, w związku z czym głównie przeznaczona jest do szacunków komponentów wariancyjnych. Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
+Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood). Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
 
-Metoda REML zapewnia estymatory mniej obciążone niż metoda ML w przypadku mieszanych modeli liniowych - zestawiając wyniki efektów stałych dla mieszanych modeli liniowych z użyciem REML i ML, można zauważyć, że te uzyskane za pomocą ML mają większe obciążenie. Różnica w rezultatach dawanych przez funkcje bibliotek "lme4" i "nlme" tkwi sposobie przedstawienia istotności wyników - biblioteka "lme4" nie zapewnia p-value, a samą t-value z powodu trudności w oszacowaniu w obecności efektów losowych. W tym celu wartość p można oszacować, wykorzystując różne metody, jak np. test ilorazu wiarygodności, test permutacyjny czy test Walda, korzystając z dostarczanej przez rezultat modelu wartości t i aproksymacji do rozkładu normalnego:
+Zestawiając wyniki efektów stałych dla mieszanych modeli liniowych z użyciem REML i ML, można zauważyć, że te uzyskane za pomocą ML mają większe obciążenie. Różnica w rezultatach dawanych przez funkcje bibliotek "lme4" i "nlme" tkwi w sposobie przedstawienia istotności wyników - biblioteka "lme4" nie dostarcza wartości p, a samą wartość t z powodu trudności w szacunkach w konfrontacji z obecnym w modelu przynajmniej jednym efektem losowym. W tym celu wartość p można oszacować, wykorzystując różne metody, jak np. test ilorazu wiarygodności, test permutacyjny czy **test Walda**:
 ```r
 coeff <- summary(LMM("lme4"))$coefficients
 p_value <- round(2 * (1 - pnorm(abs(coeff[, 3]))), 3)
 
 p_value
 ```
-Co daje następujące wartości:
 | (Intercept) | btn3a12 | lactation2 | lactation3 | lactation4 |
 |:-----------:|:-------:|:----------:|:----------:|:----------:|
 |    0.000    |  0.299  |    0.000   |    0.000   |    0.000   |
 
-Są one zgodne z tymi uzyskanymi z użyciem bibliotek "nlme" i "mgcv", a jedyna różnica między nimi polega na sposobie zaokrąglania liczb.
+Uzyskane wartości p na podstawie testu Walda są zgodne z tymi uzyskanymi z użyciem bibliotek "nlme" i "mgcv", a jedyna różnica między nimi polega na sposobie zaokrąglania.
 
-Język Python również zapewnia wartości p dla efektów stałych, a także (dodatkowo) przedziały ufności dla parametrów. Choć biblioteki w R nie zapewniają tej funkcjonalności, przedziały te również można łatwo wyprowadzić:
+Język Python również zapewnia wartości p dla efektów stałych, a także (dodatkowo) przedziały ufności dla parametrów. Choć biblioteki w R nie zawierają tej funkcjonalności, przedziały te również można łatwo tam wyprowadzić:
 ```r
 confint(LMM("lme4"))
 ```
@@ -228,12 +233,12 @@ confint(LMM("lme4"))
 Zarówno biblioteka "statsmodel" w języku Python (formuła + macierze), jak i wszystkie rozpatrywane biblioteki języka R dają porównywalne wyniki, w których różnica tkwi w resztach, co jest związane z zaokrąglaniem liczb. Rozpatrując uzyskane wyniki pod kątem statystycznym, można dojść do wniosku, że wszystkie z analizowanych parametrów (efekty stałe + jeden efekt losowy) mają istotny wpływ na produkcję mleczną osobników, z wyłączeniem parametru "btn3a1", którego wartość p jest większa niż 0.05. Wariancja efektu losowego oceniona została na ok. 12404, natomiast dostarczona poprzez funkcję "bam()" biblioteki "mgcv" w R wartość p wskazuje na istotne różnice pomiędzy krowami w produkcji mlecznej w badanej populacji (p-value < 2e-16).
 
 
-### Czas wykonania
-#### Python
+### 4.2 Czas wykonania
+#### 4.2.1 Python
 
-#### R
+#### 4.2.2 R
 
-### RAM
-#### Python
+### 4.3 RAM
+#### 4.3.1 Python
 
-#### R
+#### 4.3.2 R
