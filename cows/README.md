@@ -4,9 +4,7 @@
 1. [Opis zbioru danych](#1-opis-zbioru-danych)
 2. [Czas wykonania](#2-czas-wykonania)
 3. [RAM](#3-ram)
-4. [Rezultaty](#4-rezultaty)
-
-<br />
+4. [Rezultaty](#4-rezultaty)<br />
 
 ## 1. Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
@@ -15,7 +13,7 @@ Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym kompo
  - numer laktacji - zgrupowane w kolumnie "**lactation**",
  - roczny udój w kilogramach mleka (kg/rok) - zgrupowane w kolumnie "**milk**",
  - ilość tłuszczu w zebranym mleku (w kg) - zgrupowane w kolumnie "**fat**".
- - 
+
 Ogląd 6. pierwszych obserwacji:
 | cow.id | btn3a1 | lactation | milk | fat |
 |:------:|:------:|:---------:|:----:|:---:|
@@ -37,6 +35,7 @@ Następujący model można zatem przedstawić w formie równania:<br />
  - <img src="https://render.githubusercontent.com/render/math?math=u_{cow.id}"> nieznanym wektorem efektów losowych ze średnią <img src="https://render.githubusercontent.com/render/math?math=E(u) = 0">,
  - <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> nieznanym wektorem zakłóceń losowych o średniej <img src="https://render.githubusercontent.com/render/math?math=E({\epsilon}) = 0">.<br />
 <br />
+
 ### 1.1 Estymacja metodą REML
 *Szczegółowe analizy dot. estymacji metodą REML:* <br />
 <br />
