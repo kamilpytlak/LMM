@@ -8,7 +8,7 @@
 
 <br />
 
-## Opis zbioru danych
+## 1. Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
 
  - 409 osobników, nad którymi zastosowano powtarzalne pomiary; o unikalnych identyfikatorach zgrupowanych w kolumnie **"cow.id"**,
@@ -44,18 +44,16 @@ Następujący model można zatem przedstawić w formie równania:
 
 <br />
 
-<br />
-
-### Estymacja metodą REML
+### 1.1 Estymacja metodą REML
 *Szczegółowe analizy dot. estymacji metodą REML:* 
 
 <br />
 
-#### Efekty stałe
+#### 1.1.1 Efekty stałe
 
 <br />
 
-**R**
+**> R**
 <br />
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
 |             |  model_lm (LM) | model_lme4 (REML) | model_nlme (REML) | model_mgcv (REML) |
@@ -103,7 +101,7 @@ W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu 
 
 <br />
 
-**Python**
+**> Python**
 <br />
 _Oceny efektów stałych z wykorzystaniem deklaracji formuły:_
 |                |   Coef.  | Std.Err. |    z   | P>\|z\| |  [0.025  |  0.975]  |
@@ -128,11 +126,11 @@ _Oceny efektów stałych z wykorzystaniem deklaracji macierzy:_
 <br />
 
 
-**Efekty losowe**
+**1.1.2 Efekty losowe**
 
 <br />
 
-**R**
+**> R**
 <br />
 _Oceny efektów losowych z wykorzystaniem biblioteki “lme4”:_
 |  Groups  |     Name    | Variance | Std.Dev. |
@@ -160,7 +158,7 @@ _Oceny efektów losowych z wykorzystaniem biblioteki “mgcv”:_
 <br />
 
 
-**Python**
+**> Python**
 <br />
 _Oceny efektów losowych z wykorzystaniem deklaracji formuły:_
 | Group Var | 1240396.526 | 147.330 |
@@ -175,12 +173,12 @@ _Oceny efektów losowych z wykorzystaniem deklaracji macierzy:_
 <br />
 
 
-#### Estymacja metodą ML
+#### 1.2 Estymacja metodą ML
 *Szczegółowe analizy dot. estymacji metodą ML:*
 
 <br />
 
-**R**
+**> R**
 <br />
 Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstawiają się następująco: 
 |             |  model_lm (LM) | model_lme4 (LM) | model_nlme (LM) | model_mgcv (LM) |
@@ -193,31 +191,31 @@ Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstaw
 
 <br />
 
-## Czas wykonania
+## 2. Czas wykonania
 
 &nbsp;
 
-### Python
+### 2.1 Python
 
 &nbsp;
 
-### R
+### 2.2 R
 
 &nbsp;
 
 
-## RAM
+## 3. RAM
 
-### Python
-
-
-### R
+### 3.1 Python
 
 
+### 3.2 R
 
-## Rezultaty
 
-### Interpretacja modeli
+
+## 4. Rezultaty
+
+### 4.1 Interpretacja modeli - Python i R
 Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood), gdyż przekształcając dane nie dokonuje szacunków na pełnym zestawie parametrów, w związku z czym głównie przeznaczona jest do szacunków komponentów wariancyjnych. Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
 
 Metoda REML zapewnia estymatory mniej obciążone niż metoda ML w przypadku mieszanych modeli liniowych - zestawiając wyniki efektów stałych dla mieszanych modeli liniowych z użyciem REML i ML, można zauważyć, że te uzyskane za pomocą ML mają większe obciążenie. Różnica w rezultatach dawanych przez funkcje bibliotek "lme4" i "nlme" tkwi sposobie przedstawienia istotności wyników - biblioteka "lme4" nie zapewnia p-value, a samą t-value z powodu trudności w oszacowaniu w obecności efektów losowych. W tym celu wartość p można oszacować, wykorzystując różne metody, jak np. test ilorazu wiarygodności, test permutacyjny czy test Walda, korzystając z dostarczanej przez rezultat modelu wartości t i aproksymacji do rozkładu normalnego:
@@ -251,14 +249,12 @@ confint(LMM("lme4"))
 Zarówno biblioteka "statsmodel" w języku Python (formuła + macierze), jak i wszystkie rozpatrywane biblioteki języka R dają porównywalne wyniki, w których różnica tkwi w resztach, co jest związane z zaokrąglaniem liczb. Rozpatrując uzyskane wyniki pod kątem statystycznym, można dojść do wniosku, że wszystkie z analizowanych parametrów (efekty stałe + jeden efekt losowy) mają istotny wpływ na produkcję mleczną osobników, z wyłączeniem parametru "btn3a1", którego wartość p jest większa niż 0.05. Wariancja efektu losowego oceniona została na ok. 12404, natomiast dostarczona poprzez funkcję "bam()" biblioteki "mgcv" w R wartość p wskazuje na istotne różnice pomiędzy krowami w produkcji mlecznej w badanej populacji (p-value < 2e-16).
 
 
-### Python
+### Czas wykonania
+#### Python
 
-#### Czas wykonania
-#### RAM
+#### R
 
-&nbsp;
+### RAM
+#### Python
 
-### R
-
-#### Czas wykonania
-#### RAM
+#### R
