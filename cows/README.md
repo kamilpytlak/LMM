@@ -2,15 +2,9 @@
 # Zbiór danych "cows"
 
 1. [Opis zbioru danych](#1-opis-zbioru-danych)
-1.1 [Estymacja metodą REML](#1-1-estymacja-metoda-reml)
-1.2 [Estymacja metodą ML](#1-2-estymacja-metoda-ml)
 2. [Czas wykonania](#2-czas-wykonania)
-2.1 [Python](#2-1-python)
-2.2 [R](#2-2-r)
 3. [RAM](#3-ram)
-3.1 [Python](#3-1-python)
-3.2 [R](#3-2-r)
-5. [Wnioski](#4-wnioski)<br />
+4. [Wnioski](#4-wnioski)<br />
 <br />
 ## 1. Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
