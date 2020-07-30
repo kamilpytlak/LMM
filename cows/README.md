@@ -42,6 +42,7 @@ Następujący model można zatem przedstawić w formie równania:<br />
 - w języku Python: [https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb),
 - w języku R: <br />
 <br />
+
 #### 1.1.1 Efekty stałe<br />
 **> R**<br />
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
