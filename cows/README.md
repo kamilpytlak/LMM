@@ -59,6 +59,7 @@ Model został poddany interpretacji w oparciu o porównanie wartości estymator�
 <br />
 
 **R**
+<br />
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
 |             |  model_lm (LM) | model_lme4 (REML) | model_nlme (REML) | model_mgcv (REML) |
 |:-----------:|:---------:|:----------:|:----------:|:---------:|
@@ -70,7 +71,7 @@ Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodno�
 
 W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu i poziomy laktacji, natomiast w następnych kolejno: klasyczny model liniowy, model mieszany z użyciem biblioteki lme4, model mieszany z użyciem biblioteki nlme, model mieszany z użyciem biblioteki mgcv.
 
-&nbsp;
+<br />
 
 *Oceny efektów stałych z wykorzystaniem biblioteki "lme4":*
 |             | Estimate | Std. Error | t value |
@@ -81,7 +82,7 @@ W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu 
 | lactation3  | 1800.54  | 102.10     | 17.635  |
 | lactation4  | 1669.27  | 176.45     | 9.460   |
 
-&nbsp;
+<br />
 
 *Oceny efektów stałych z wykorzystaniem biblioteki "nlme":*
 |             |   Value  | Std.Error |  DF |  t-value | p-value |
@@ -92,7 +93,7 @@ W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu 
 |  lactation3 | 1800.538 | 102.10172 | 588 | 17.63475 |  0.0000 |
 |  lactation4 | 1669.272 | 176.44866 | 588 |  9.46038 |  0.0000 |
 
-&nbsp;
+<br />
 
 *Oceny efektów stałych z wykorzystaniem biblioteki "mgcv":*
 |             | Estimate | Std.Error | t-value | Pr(>\|t\|) |     |
@@ -103,10 +104,11 @@ W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu 
 |  lactation3 |  1800.54 |   102.10  |  17.635 |   <2e-16   | *** |
 |  lactation4 |  1669.27 |   176.45  |  9.460  |   <2e-16   | *** |
 
-&nbsp;
+<br />
 
 **Python**
-&nbsp;
+
+<br />
 
 _Oceny efektów stałych z wykorzystaniem deklaracji formuły:_
 |                |   Coef.  | Std.Err. |    z   | P>\|z\| |  [0.025  |  0.975]  |
@@ -117,7 +119,7 @@ _Oceny efektów stałych z wykorzystaniem deklaracji formuły:_
 | lactation[T.3] | 1800.538 |  102.283 | 17.604 |  0.000  | 1600.067 | 2001.008 |
 | lactation[T.4] | 1669.271 |  177.492 |  9.405 |  0.000  | 1321.394 | 2017.148 |
 
-&nbsp;
+<br />
 
 _Oceny efektów stałych z wykorzystaniem deklaracji macierzy:_
 |                |   Coef.  | Std.Err. |    z   | P>\|z\| |  [0.025  |  0.975]  |
@@ -128,23 +130,22 @@ _Oceny efektów stałych z wykorzystaniem deklaracji macierzy:_
 | lactation[T.3] | 1800.538 |  102.283 | 17.604 |  0.000  | 1600.067 | 2001.008 |
 | lactation[T.4] | 1669.271 |  177.492 |  9.405 |  0.000  | 1321.394 | 2017.148 |
 
-&nbsp;
+<br />
 
 
 **Efekty losowe**
-&nbsp;
+
+<br />
 
 **R**
-
-&nbsp;
-
+<br />
 _Oceny efektów losowych z wykorzystaniem biblioteki “lme4”:_
 |  Groups  |     Name    | Variance | Std.Dev. |
 |:--------:|:-----------:|:--------:|:--------:|
 |  cow.id  | (Intercept) |  1240403 |   1114   |
 | Residual |             |  1252911 |   1119   |
 
-&nbsp;
+<br />
 
 _Oceny efektów losowych z wykorzystaniem biblioteki “nlme”:_
 
@@ -154,38 +155,38 @@ Random effects:
 |:-------:|:-----------:|:--------:|
 | StdDev: |   1113.734  | 1119.335 |
 
-&nbsp;
+<br />
 
 _Oceny efektów losowych z wykorzystaniem biblioteki “mgcv”:_
 |           |  edf  | Ref.df |   F   | p-value |     |
 |:---------:|:-----:|:------:|:-----:|:-------:|:---:|
 | s(cow.id) | 277.4 |   407  | 2.351 |  <2e-16 | *** |
 
-&nbsp;
+<br />
+
 
 **Python**
-&nbsp;
-
+<br />
 _Oceny efektów losowych z wykorzystaniem deklaracji formuły:_
 | Group Var | 1240396.526 | 147.330 |
 |:---------:|:-----------:|:-------:|
 
-&nbsp;
+<br />
 
 _Oceny efektów losowych z wykorzystaniem deklaracji macierzy:_
 | Group Var | 1240396.526 | 147.330 |
 |:---------:|:-----------:|:-------:|
 
-&nbsp;
+<br />
+
 
 #### Estymacja metodą ML
 *Szczegółowe analizy dot. estymacji metodą ML:*
 
-&nbsp;
+<br />
 
 **R**
-&nbsp;
-
+<br />
 Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstawiają się następująco: 
 |             |  model_lm (LM) | model_lme4 (LM) | model_nlme (LM) | model_mgcv (LM) |
 |:-----------:|:---------:|:----------:|:----------:|:---------:|
@@ -195,7 +196,7 @@ Oceny estymatorów z wykorzystaniem metody największej wiarygodności przedstaw
 |  lactation3 | 1856.3374 |  1800.5067 |  1800.5067 | 1800.5067 |
 |  lactation4 | 1856.6869 |  1669.1736 |  1669.1736 | 1669.1736 |
 
-&nbsp;
+<br />
 
 ## Czas wykonania
 
