@@ -159,13 +159,42 @@ _Oceny efektów losowych z wykorzystaniem deklaracji macierzy:_
 
 
 ## 2. Czas wykonania
-
+Dla wszystkich badanych możliwości obydwu języków czasy wykonania zebrano dla każdego przypadku 100-krotnie, by zminimalizować ryzyko obciążenia średniej pomiarami odstającymi. Na tej podstawie oszacowano średnią i odchylenie standardowe, co posłużyło do zaprojektowania analiz porównawczych. Szczegóły dot. metodyki: [https://github.com/kamilpytlak/LMM#metodyka](https://github.com/kamilpytlak/LMM#metodyka).
 
 ### 2.1 Python
 *Szczegółowe analizy dot. czasu wykonywania w języku Python: [https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/Python.ipynb)*
+W pętli 100-krotnie zebrano czasy wykonywania konstrukcji modelu z deklaracją formuły i macierzy, a wartości zaokrąglono do 4 miejsc po przecinku i kolumnowo zapisano w pliku "times_cows.csv", w którym w 1. kolumnie znajdują się czasy wykonywania dla formuły, a w 2. - macierzy.
+
+Ogląd 6. pierwszych czasów wykonywania:
+| statsmodel_formula | statsmodel_matrix |
+|:------------------:|:-----------------:|
+|       0.5667       |       0.5457      |
+|       0.6446       |       0.6686      |
+|       0.6416       |       0.6027      |
+|       0.6846       |       0.6176      |
+|       0.6816       |       0.6696      |
+|       0.6506       |       0.6196      |
+
+Bazując na pomiarach, oszacowano przeciętną wartość i odchylenie standardowe. **Dla deklaracji modelu za pomocą formuły średnia wynosiła 0.6765 sek., odchylenie standardowe - 0.0744 sek. a dla macierzy - średnia: 0.6242 sek., a odchylenie standardowe - 0.0289 sek.** 
+
+Rozrzut wartości wraz z ich zagęszczeniem i zaznaczeniem median znaleźć można na poniższym wykresie:
+![Rozrzut czasów wykonywania modelu w zależności od jego konstrukcji](https://i.imgur.com/0AkZ8po.png)
+
+Ze względu na zbliżone do siebie średnie czasy oczekiwania obu deklaracji, postanowiono sprawdzić, czy różnią się one istotnie. Z racji tego, że rozkład czasów wykonywania metody "formula" nie jest normalny (p-value = 9.33e-08), wykonano test Wilcoxona. Założono hipotezę, że czasy nie różnią się przeciwko hipotezie, że czas wykonywania konstrukcji modelu metodą "formula" jest większy niż "matrix".
+
+```r
+wilcox.test(csv_data$statsmodel_formula, csv_data$statsmodel_matrix, alternative = "greater")
+Wilcoxon rank sum test with continuity correction
+
+data:  csv_data$statsmodel_formula and csv_data$statsmodel_matrix
+W = 7313, p-value = 7.988e-09
+alternative hypothesis: true location shift is greater than 0
+```
+
+**Zatem dla analizowanego zbioru danych o wielkości 1000 obserwacji z dwoma efektami stałymi i jednym losowym sposób konstrukcji za pomocą macierzy jest szybszy niż za pomocą formuły, co odrzuca hipotezę o równości obu średnich.**
 
 ### 2.2 R
-*Szczegółowe analizy dot. czasu wykonywania w języku R:*
+*Szczegółowe analizy dot. czasu wykonywania w języku R:* [https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb](https://github.com/kamilpytlak/LMM/blob/master/cows/R.ipynb)
 
 
 ## 3. RAM
