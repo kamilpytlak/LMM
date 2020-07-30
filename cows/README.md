@@ -10,13 +10,12 @@
 
 ## 1. Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
-
  - 409 osobników, nad którymi zastosowano powtarzalne pomiary; o unikalnych identyfikatorach zgrupowanych w kolumnie **"cow.id"**,
  - genotyp dla ortologa genu BTN1 będący zmienną dychotomiczną, tzn. przyjmującą wartość "1" w przypadku wystąpienia homozygoty z allelem dzikim lub "2" w przypadku heterozygoty/homozygoty mutanta - zgrupowane w kolumnie **"btn3a1"**,
  - numer laktacji - zgrupowane w kolumnie "**lactation**",
  - roczny udój w kilogramach mleka (kg/rok) - zgrupowane w kolumnie "**milk**",
  - ilość tłuszczu w zebranym mleku (w kg) - zgrupowane w kolumnie "**fat**".
-
+ - 
 Ogląd 6. pierwszych obserwacji:
 | cow.id | btn3a1 | lactation | milk | fat |
 |:------:|:------:|:---------:|:----:|:---:|
@@ -27,35 +26,22 @@ Ogląd 6. pierwszych obserwacji:
 |    3   |    1   |     3     | 8621 | 330 |
 |    4   |    1   |     1     | 9536 | 365 |
 
-Sprawdzano, czy obserwowana mutacja (kolumna "btn3a1") ma wpływ na wydajność mleczną krów (kolumna "milk"). Z racji tego, że wśród tych samych osobników pomiary były powtarzane wielokrotnie, a przedmiotem analiz jest zbadanie zmienności pomiędzy osobnikami niż same wartości ich efektów, **efekt osobniczy (kolumna "cow.id") potraktowany został jako efekt losowy**. Przykładowy zbiór danych jest względnie niewielkim wycinkiem całej populacji krów z badanymi cechami, więc uwzględnienie tego efektu jako efektu stałego wiązałoby się z dodaniem do modelu 409 zmiennych niezależnych, a dodatkowo nie są znane poszczególne wartości parametrów pozostałych osobników, ponieważ niemożliwym jest zebranie ich w komplecie ze względu na wielkość całej populacji (co tyczy się zresztą niemal każdego badania statystycznego). **Jako efekty stałe potraktowane zostały genotyp (kolumna "btn3a1", o wartościach "1" lub "2") i numer laktacji (kolumna "lactation", o wartościach całkowitych od "1" do "4")**.
+Sprawdzano, czy obserwowana mutacja (kolumna "btn3a1") ma wpływ na wydajność mleczną krów (kolumna "milk"). Z racji tego, że wśród tych samych osobników pomiary były powtarzane wielokrotnie, a przedmiotem analiz jest zbadanie zmienności pomiędzy osobnikami niż same wartości ich efektów, **efekt osobniczy (kolumna "cow.id") potraktowany został jako efekt losowy**. Przykładowy zbiór danych jest względnie niewielkim wycinkiem całej populacji krów z badanymi cechami, więc uwzględnienie tego efektu jako efektu stałego wiązałoby się z dodaniem do modelu 409 zmiennych niezależnych, a dodatkowo nie są znane poszczególne wartości parametrów pozostałych osobników, ponieważ niemożliwym jest zebranie ich w komplecie ze względu na wielkość całej populacji (co tyczy się zresztą niemal każdego badania statystycznego). **Jako efekty stałe potraktowane zostały genotyp (kolumna "btn3a1", o wartościach "1" lub "2") i numer laktacji (kolumna "lactation", o wartościach całkowitych od "1" do "4")**.<br />
 
-<br />
-
-Następujący model można zatem przedstawić w formie równania:
-<br />
-<img src="https://render.githubusercontent.com/render/math?math=y_{milk} = X_{btn3a1} * \beta_{btn3a1} %2B X_{lactation} * \beta_{lactation} %2B Z_{cow.id} * u_{cow.id} %2B \epsilon">
-<br />
-<br />
-, w którym:
+Następujący model można zatem przedstawić w formie równania:<br />
+<img src="https://render.githubusercontent.com/render/math?math=y_{milk} = X_{btn3a1} * \beta_{btn3a1} %2B X_{lactation} * \beta_{lactation} %2B Z_{cow.id} * u_{cow.id} %2B \epsilon"><br />
+, gdzie:
 - <img src="https://render.githubusercontent.com/render/math?math=y_{milk}"> jest wektorem obserwacji ze średnią <img src="https://render.githubusercontent.com/render/math?math=E(y_{milk}) = X_{btn3a1} * \beta_{btn3a1} %2B X_{lactation} * \beta_{lactation}"> (zmienna zależna)
  - <img src="https://render.githubusercontent.com/render/math?math=X_{btn3a1}">, <img src="https://render.githubusercontent.com/render/math?math=X_{lactation}"> i <img src="https://render.githubusercontent.com/render/math?math=Z_{cow.id}"> znanymi macierzami projektowymi składającymi się z realizacji opisywanych czynników,
  -  <img src="https://render.githubusercontent.com/render/math?math=\beta_{btn3a1}"> i <img src="https://render.githubusercontent.com/render/math?math=\beta_{lactation}"> nieznanymi wektorami efektów stałych,
  - <img src="https://render.githubusercontent.com/render/math?math=u_{cow.id}"> nieznanym wektorem efektów losowych ze średnią <img src="https://render.githubusercontent.com/render/math?math=E(u) = 0">,
- - <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> nieznanym wektorem zakłóceń losowych o średniej <img src="https://render.githubusercontent.com/render/math?math=E({\epsilon}) = 0">.
-
+ - <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> nieznanym wektorem zakłóceń losowych o średniej <img src="https://render.githubusercontent.com/render/math?math=E({\epsilon}) = 0">.<br />
 <br />
-
 ### 1.1 Estymacja metodą REML
-*Szczegółowe analizy dot. estymacji metodą REML:* 
-
+*Szczegółowe analizy dot. estymacji metodą REML:* <br />
 <br />
-
-#### 1.1.1 Efekty stałe
-
-<br />
-
-**> R**
-<br />
+#### 1.1.1 Efekty stałe<br />
+**> R**<br />
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
 |             |  model_lm (LM) | model_lme4 (REML) | model_nlme (REML) | model_mgcv (REML) |
 |:-----------:|:---------:|:----------:|:----------:|:---------:|
@@ -65,10 +51,8 @@ Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodno�
 |  lactation3 | 1856.3374 |  1800.5379 |  1800.5379 | 1800.5379 |
 |  lactation4 | 1856.6869 |  1669.2723 |  1669.2723 | 1669.2723 |
 
-W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu i poziomy laktacji, natomiast w następnych kolejno: klasyczny model liniowy, model mieszany z użyciem biblioteki lme4, model mieszany z użyciem biblioteki nlme, model mieszany z użyciem biblioteki mgcv.
-
+W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny, ortolog genu i poziomy laktacji, natomiast w następnych kolejno: klasyczny model liniowy, model mieszany z użyciem biblioteki lme4, model mieszany z użyciem biblioteki nlme, model mieszany z użyciem biblioteki mgcv.<br />
 <br />
-
 *Oceny efektów stałych z wykorzystaniem biblioteki "lme4":*
 |             | Estimate | Std. Error | t value |
 |-------------|----------|------------|---------|
