@@ -261,6 +261,7 @@ Rozrzut wartości wraz z ich zagęszczeniem i zaznaczeniem median zilustrowano:
 ![Wykres rozrzutu czasów wykonywania modelu w zależności od jego konstrukcji dla języka R](https://i.imgur.com/jECbdBd.png)
 
 Wykres pudełkowy wyraźnie uwidacznia dużą rozbieżność pomiędzy czasami wykonywania bibliotek "lme4", "nlme" a "mgcv". Aby graficznie uchwycić różnice pomiędzy bibliotekami "lme4" a "nlme", które na tym wykresie nie dają się zauważyć, stworzono kolejny wykres, uwzględniający jedynie te biblioteki:
+
 ![Wykres rozrzutu czasów wykonywania modelu w zależności od jego konstrukcji dla języka R](https://i.imgur.com/8Q6lgcM.png)
 
 Różnice dają się zauważyć - **czasy wykonywania dla biblioteki "lme4" wahają się pomiędzy 0.025 a 0.035 sek., natomiast dla biblioteki "nlme" - ok. 0.05 aż do ok. 0.075 sek.** 
