@@ -6,7 +6,7 @@
 3. [RAM](#ram)
 4. [Rezultaty](#rezultaty)
 
-&nbsp;
+<br />
 
 ## Opis zbioru danych
 Zbiór danych "cows" posłużył do konstrukcji modelu mieszanego z jednym komponentem losowym. Na łączną liczbę obserwacji w wysokości 1000 obserwacji składa się:
@@ -27,42 +27,38 @@ Ogląd 6. pierwszych obserwacji:
 |    3   |    1   |     3     | 8621 | 330 |
 |    4   |    1   |     1     | 9536 | 365 |
 
-&nbsp;
-
 Sprawdzano, czy obserwowana mutacja (kolumna "btn3a1") ma wpływ na wydajność mleczną krów (kolumna "milk"). Z racji tego, że wśród tych samych osobników pomiary były powtarzane wielokrotnie, a przedmiotem analiz jest zbadanie zmienności pomiędzy osobnikami niż same wartości ich efektów, **efekt osobniczy (kolumna "cow.id") potraktowany został jako efekt losowy**. Przykładowy zbiór danych jest względnie niewielkim wycinkiem całej populacji krów z badanymi cechami, więc uwzględnienie tego efektu jako efektu stałego wiązałoby się z dodaniem do modelu 409 zmiennych niezależnych, a dodatkowo nie są znane poszczególne wartości parametrów pozostałych osobników, ponieważ niemożliwym jest zebranie ich w komplecie ze względu na wielkość całej populacji (co tyczy się zresztą niemal każdego badania statystycznego). **Jako efekty stałe potraktowane zostały genotyp (kolumna "btn3a1", o wartościach "1" lub "2") i numer laktacji (kolumna "lactation", o wartościach całkowitych od "1" do "4")**.
-&nbsp;
+
+<br />
 
 Następujący model można zatem przedstawić w formie równania:
-
-
+<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{milk} = X_{btn3a1} * \beta_{btn3a1} %2B X_{lactation} * \beta_{lactation} %2B Z_{cow.id} * u_{cow.id} %2B \epsilon">
-
+<br />
 , w którym:
-
 - <img src="https://render.githubusercontent.com/render/math?math=y_{milk}"> jest wektorem obserwacji ze średnią <img src="https://render.githubusercontent.com/render/math?math=E(y_{milk}) = X_{btn3a1} * \beta_{btn3a1} %2B X_{lactation} * \beta_{lactation}"> (zmienna zależna)
  - <img src="https://render.githubusercontent.com/render/math?math=X_{btn3a1}">, <img src="https://render.githubusercontent.com/render/math?math=X_{lactation}"> i <img src="https://render.githubusercontent.com/render/math?math=Z_{cow.id}"> znanymi macierzami projektowymi składającymi się z realizacji opisywanych czynników,
  -  <img src="https://render.githubusercontent.com/render/math?math=\beta_{btn3a1}"> i <img src="https://render.githubusercontent.com/render/math?math=\beta_{lactation}"> nieznanymi wektorami efektów stałych,
  - <img src="https://render.githubusercontent.com/render/math?math=u_{cow.id}"> nieznanym wektorem efektów losowych ze średnią <img src="https://render.githubusercontent.com/render/math?math=E(u) = 0">,
  - <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> nieznanym wektorem zakłóceń losowych o średniej <img src="https://render.githubusercontent.com/render/math?math=E({\epsilon}) = 0">.
 
-&nbsp;
+<br />
 
 ### Interpretacja
 Model został poddany interpretacji w oparciu o porównanie wartości estymatorów uzyskanych metodą REML i ML w przypadku mieszanych modeli liniowych. Jak wyjaśniono w [https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie](https://github.com/kamilpytlak/LMM#mieszane-modele-liniowe-mlm---estymacja-parametr%C3%B3w-i-zastosowanie), estymacja metodą ograniczonej największej wiarygodności (REML - restricted maximum likelihood) zapewnia estymatory mniej obciążone niż w przypadku metody największej wiarygodności (ML - maximum likelihood), gdyż przekształcając dane nie dokonuje szacunków na pełnym zestawie parametrów, w związku z czym głównie przeznaczona jest do szacunków komponentów wariancyjnych. Uzyskane oceny efektów stałych (z wykorzystaniem zarówno metody REML, jak i ML) zestawiono z ocenami standardowego liniowego modelu.
 
-&nbsp;
+<br />
 
 #### Estymacja metodą REML
 *Szczegółowe analizy dot. estymacji metodą REML:* 
 
-&nbsp;
+<br />
 
 **Efekty stałe**
-&nbsp;
+
+<br />
 
 **R**
-&nbsp;
-
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
 |             |  model_lm (LM) | model_lme4 (REML) | model_nlme (REML) | model_mgcv (REML) |
 |:-----------:|:---------:|:----------:|:----------:|:---------:|
