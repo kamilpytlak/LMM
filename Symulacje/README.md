@@ -48,6 +48,7 @@ Następujący model można zatem przedstawić w formie równania:<br />
 **> R**<br />
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
 
+
 |            | model_lme4 (REML) | model_nlme (REML) | model_mgcv (REML) |
 |:-----------:|:---------:|:----------:|:----------:|:---------:|
 | (Intercept) |  15.39033 |  15.390336 | 7.88429 |
