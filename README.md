@@ -1,4 +1,4 @@
-# Liniowe modele mieszane (MLM): Porównanie efektywności algorytmów w językach Python i R
+# Liniowe modele mieszane (MLM): Porównanie efektywności bibliotek w językach Python i R
 
 
 ## Streszczenie
