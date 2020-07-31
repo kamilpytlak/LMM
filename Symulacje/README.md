@@ -47,13 +47,11 @@ Następujący model można zatem przedstawić w formie równania:<br />
 #### 1.1.1 Efekty stałe<br />
 **> R**<br />
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
-<br />
 
-|            | model_lme4 | model_nlme | model_mgcv |
-|:-----------:|:---------:|:----------:|:----------:|:---------:|
-| (Intercept) |  15.39033 |  15.390336 | 7.88429 |
-|   x0   |  -0.04068 |  -0.040677 | -0.04064 |
-
+|             | model_lme4 | model_nlme | model_mgcv |
+|:-----------:|:----------:|:----------:|:----------:|
+| (Intercept) |  15.39033  |  15.390336 |   7.88429  |
+|      x0     |  -0.04068  |  -0.040677 |  -0.04064  |
 
 W pierwszej kolumnie zebrane zostały efekty stałe - wyraz wolny i "x0", natomiast w następnych kolejno: model mieszany z użyciem biblioteki lme4, model mieszany z użyciem biblioteki nlme, model mieszany z użyciem biblioteki mgcv.<br />
 <br />
