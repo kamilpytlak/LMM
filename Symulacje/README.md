@@ -151,7 +151,7 @@ Czasy dla wielu różnych kombinacji zestawów (z różnymi połączeniami liczb
 ### 2.1 Dla jednego zbioru milionowego
 
 #### 2.1.1 Python
-*Szczegółowe analizy dot. czasu wykonywania w języku Python: [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb)
+*Szczegółowe analizy dot. czasu wykonywania w języku Python*: [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb)
 
 Ogląd 6. pierwszych czasów wykonywania:
 | statsmodel_formula | statsmodel_matrix |
@@ -255,8 +255,8 @@ Bazując na wielu różnych kombinacjach liczby obserwacji-grup sztucznie wygene
 |       50000       |      25     |     0.3971     |    lme4    | 70.4420 |
 |       60000       |      25     |     0.4710     |    lme4    | 83.5720 |
 
-W tej części analizy skupione były wokół modelu liniowego. Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:
-<img src="https://render.githubusercontent.com/render/math?math=y_{Czas} = X_{L. obserwacji} * B_{L. obserwacji} %2B X_{L. grup} * B_{L. grup} %2B X_{L. obserwacji} * X_{L. grup} * B_{L.obserwacji:L.grup}">
+W tej części analizy skupione były wokół modelu liniowego. Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:<br />
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas} = B_{L. obserwacji} * X_{L. obserwacji} %2B B_{L. grup} * X_{L. grup} %2B B_{L.obserwacji:L.grup} * X_{L. obserwacji} * X_{L. grup}">
 
 #### 2.2.1 Python
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i metody "formula":**
@@ -383,6 +383,11 @@ Multiple R-squared:  0.9482,	Adjusted R-squared:  0.9477
 F-statistic:  1799 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
+W przypadku funkcji "lmer()" z biblioteki "nlme" również zauważa się dodatnią korelację między liczbą obserwacji, grup, a czasem wykonania. Można to zapisać następującym równaniem:<br />
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas (nlme)} = 0.00001213 * X_{L. obserwacji} %2B 0.0001632 * X_{L. grup}">
+
+Przyrównując do biblioteki "lme4", czas wykonania modelu przy stałej liczbie obserwacji dla obu bibliotek różni się nieznacznie - o ok. 12%. Jednakże różnica przy uwzględnieniu liczby grup jest już diametralna, ponieważ **przy tej samej liczbie grup dla obydwu bibliotek czas konstrukcji dla "lme4" jest niemal 3-krotnie większy od czasu konstrukcji "nlme.**
+
 
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i biblioteki "mgcv":**
 ```r
@@ -408,6 +413,14 @@ Multiple R-squared:  0.8557,	Adjusted R-squared:  0.8543
 F-statistic: 583.2 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
+Funkcja "bam()" z biblioteki "mgcv" wydaje się funkcjonować względnie wolno dla małych zbiorów danych (tu wynikł istotny wyraz wolny), aczkolwiek dla dużych zbiorów danych jest ona o wiele efektywniejsza od wszystkich analizowanych tu deklaracji/bibliotek. Można to zapisać następującym równaniem:<br /> 
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas (bam)} = 0.000002334 * X_{L. obserwacji} %2B 0.00007872 * X_{L. grup} %2B -0.00000000005103 * X_{L. obserwacji} * X_{L. grup} + 1.478">
+
+Dla porównania, **przy tej samej liczbie obserwacji (nie uwzględniając grup), czas wykonania jest ponad 5-krotnie mniejszy od biblioteki "lme4" i "nlme".** Uwzględniając grupy (bez uwzględniania liczby obserwacji), czas konstrukcji z użyciem tej biblioteki w porównaniu z biblioteką "lme4" jest ponad 6-krotnie mniejszy, natomiast w porównaniu z "nlme" - 2-krotnie. **Złożenie liczby obserwacji z liczbą grup z kolei składa się na jeszcze mniejszy czas wykonywania.**
+
+![enter image description here](https://i.imgur.com/HKL4Fo7.png)
+
+**Biblioteka "lme4" jest bardziej wrażliwa na wydłużenie czasu konstrukcji w ramach zwiększania stopnia złożoności modelu, tj. liczby grup.** Niewątpliwie jest ona efektywna dla małych zbiorów danych o niewielkiej złożoności grupowej bądź też dużych zbiorów danych, ale w dalszym ciągu o niewielkiej złożoności grupowej. **Dla danych wielkoskalowych efektywna wydaje się być biblioteka "mgcv"** - wzrost czasu wykonywania spowodowany wzrostem liczby obserwacji i/lub grup jest wprawdzie istotny, ale nieznaczący dla obliczeń.
 
 
 ## 3. RAM
