@@ -46,6 +46,7 @@ Następujący model można zatem przedstawić w formie równania:<br />
 
 #### 1.1.1 Efekty stałe<br />
 **> R**<br />
+
 Oceny estymatorów z wykorzystaniem metody ograniczonej największej wiarygodności przedstawiają się następująco:
 |            | model_lme4 (REML) | model_nlme (REML) | model_mgcv (REML) |
 |:-----------:|:---------:|:----------:|:----------:|:---------:|
@@ -254,7 +255,7 @@ Bazując na wielu różnych kombinacjach liczby obserwacji-grup sztucznie wygene
 |       60000       |      25     |     0.4710     |    lme4    | 83.5720 |
 
 W tej części analizy skupione były wokół modelu liniowego. Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:
-$$y_{Czas} = X_{L. obserwacji} * B_{L. obserwacji} + X_{L. grup} * B_{L. grup} + X_{L. obserwacji} * X_{L. grup} * B_{L.obserwacji:L.grup}$$
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas} = X_{L. obserwacji} * B_{L. obserwacji} %2B X_{L. grup} * B_{L. grup} %2B X_{L. obserwacji} * X_{L. grup} * B_{L.obserwacji:L.grup}">
 
 #### 2.2.1 Python
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i metody "formula":**
@@ -283,7 +284,7 @@ F-statistic:  4663 on 3 and 295 DF,  p-value: < 2.2e-16
 
 Wszystkie badane komponenty mają dodatni wpływ na czas wykonywania modelu - zarówno liczba obserwacji, liczba grup, jak i przyrost liczby obserwacji i grup łącznie (jako interakcja). Odnosząc się do zamieszczonego wyżej ogólnego modelu liniowego tu rozpatrywanego, w tym przypadku zależność przedstawia się następująco:
 
-$$y_{Czas} = 0.0000101 * X_{L. obserwacji} +  0.006286 * X_{L. grup} * 0.0000000009173 * X_{L. obserwacji} * X_{L. grup} $$
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas (formula)} = 0.0000101 * X_{L. obserwacji} %2B  0.006286 * X_{L. grup} %2B 0.0000000009173 * X_{L. obserwacji} * X_{L. grup}">
 
 Jak można zauważyć, dla wzrostów liczby obserwacji czy grup rzędów jedności różnice wydają się być minimalne. Jednakże już dla wielkoskalowych danych, różnice są już znaczące, np. dla 100.000 obserwacji (bez uwzględniania grup) jest to wzrost o 1.01 sekundy. Uwzględniając grupy, czas wzrasta intensywniej, bowiem już nawet dla 1.000 grup (bez uwzględniania obserwacji) następuje wzrost o 6.286 sekund.
 
@@ -313,7 +314,7 @@ F-statistic:  5212 on 3 and 293 DF,  p-value: < 2.2e-16
 
 W przypadku macierzy również wszystkie badane komponenty mają dodatni wpływ na czas wykonywania modelu - zarówno liczba obserwacji, liczba grup, jak i przyrost liczby obserwacji i grup łącznie (jako interakcja). Odnosząc się do zamieszczonego wyżej ogólnego modelu liniowego tu rozpatrywanego, w tym przypadku zależność przedstawia się następująco:
 
-$$y_{Czas (matrix)} = 0.00001033 * X_{L. obserwacji} +  0.006333 * X_{L. grup} * 0.000000000749 * X_{L. obserwacji} * X_{L. grup} $$
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas (matrix)} = 0.00001033 * X_{L. obserwacji} %2B  0.006333 * X_{L. grup} %2B 0.000000000749 * X_{L. obserwacji} * X_{L. grup}">
 
 Średni czas konstrukcji modeli z wykorzystaniem macierzy jest mniejszy od średniego czasu z wykorzystaniem formuły o ok. 2.3%. Oznacza to, że dla zbioru danych z 1.000.000 obserwacjami szacunkowo w przypadku formuły operacja zajmie 10.1 sekundy, a dla macierzy - 10.33 sekund, więc ta różnica wydaje się być minimalna i nieznacząca. Inaczej jednak jest, mając na uwadze liczbę grup - tu wraz ze wzrostem liczby grup o 1000, czas wykonywania wzrasta o 6.333 sekund, natomiast dla formuły byłoby to 6.286 sekund. **Dlatego w analizowanym przypadku jednego efektu stałego i losowego dla dwóch możliwych deklaracji modelu w języku Python, to nie liczba obserwacji, a liczba grup ma znaczący wpływ na rezultat.**
 
@@ -352,7 +353,7 @@ F-statistic: 55.62 on 3 and 295 DF,  p-value: < 2.2e-16
 
 **Dla funkcji "lme()" z biblioteki "lme4" zarówno liczba obserwacji, jak i liczba grup dodatnio korelują z czasem wykonywania**; nie stwierdzono jednak interakcji. Powołując się na wcześniej zamieszczony ogólny model liniowy, w tym przypadku przedstawia się on następująco:
 
-$$y_{Czas (lme4)} = 0.00001552 * X_{L. obserwacji} +  0.000489 * X_{L. grup}$$
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas (lme4)} = 0.00001552 * X_{L. obserwacji} %2B 0.000489 * X_{L. grup}">
 
 Dla liczby obserwacji wzrost czasu wykonania jest niemal analogiczny do tego z języka Python. **Duża różnica tkwi jednak w zależności od grupy** - dla języka Python wraz ze wzrostem liczby grup o 1.000, czas wykonania wzrasta średnio ok. 6 sekund, natomiast w przypadku biblioteki "lme4" - o ok. 0.5 sekundy. **Nie ma więc co się dziwić, że konstrukcja modelu dla sztucznego zbioru danych z 1.000.000 obserwacji i 10.000 grup wyniosła ok. 100 sekund, a dla tego samego zbioru, ale dla biblioteki "lme4" - ok. 20 sekund.**
 
