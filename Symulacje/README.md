@@ -333,28 +333,28 @@ lm(formula = Czas_wykonania ~ Liczba_obserwacji * Liczba_grup,
     data = interakcje %>% filter(Biblioteka == "lme4"))
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--4.996 -2.525 -0.452  0.917 98.569 
+    Min      1Q  Median      3Q     Max 
+-4.9053 -1.3867 -0.1070  0.9754  6.3093 
 
 Coefficients:
                                 Estimate Std. Error t value Pr(>|t|)    
-(Intercept)                   -1.412e+00  9.422e-01  -1.499  0.13499    
-Liczba_obserwacji              1.552e-05  1.620e-06   9.581  < 2e-16 ***
-Liczba_grup                    4.890e-04  1.646e-04   2.972  0.00321 ** 
-Liczba_obserwacji:Liczba_grup -1.645e-10  2.819e-10  -0.583  0.56003    
+(Intercept)                   -1.199e+00  3.354e-01  -3.574  0.00041 ***
+Liczba_obserwacji              1.520e-05  5.766e-07  26.370  < 2e-16 ***
+Liczba_grup                    5.126e-05  5.857e-05   0.875  0.38220    
+Liczba_obserwacji:Liczba_grup  4.824e-10  1.004e-10   4.807 2.45e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 6.266 on 295 degrees of freedom
-Multiple R-squared:  0.3613,	Adjusted R-squared:  0.3548 
-F-statistic: 55.62 on 3 and 295 DF,  p-value: < 2.2e-16
+Residual standard error: 2.231 on 295 degrees of freedom
+Multiple R-squared:  0.8413,	Adjusted R-squared:  0.8397 
+F-statistic: 521.4 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-**Dla funkcji "lme()" z biblioteki "lme4" zarówno liczba obserwacji, jak i liczba grup dodatnio korelują z czasem wykonywania**; nie stwierdzono jednak interakcji. Powołując się na wcześniej zamieszczony ogólny model liniowy, w tym przypadku przedstawia się on następująco:
+**Dla funkcji "lme()" z biblioteki "lme4" zarówno liczba obserwacji i liczba obserwacji w interakcji z liczbą grup dodatnio korelują z czasem wykonywania**. Nie stwierdzono jednak zależności pomiędzy samymi grupami a czasem wykonywania. Powołując się na wcześniej zamieszczony ogólny model liniowy, w tym przypadku przedstawia się on następująco:
 
-<img src="https://render.githubusercontent.com/render/math?math=y_{Czas (lme4)} = 0.00001552 * X_{L. obserwacji} %2B 0.000489 * X_{L. grup}">
+<img src="https://render.githubusercontent.com/render/math?math=y_{Czas (lme4)} = 0.00001520 * X_{L. obserwacji} %2B 0.0000000004824 * X_{L. obserwacji} * X_{L. grup} - 1.199">
 
-Dla liczby obserwacji wzrost czasu wykonania jest niemal analogiczny do tego z języka Python. **Duża różnica tkwi jednak w zależności od grupy** - dla języka Python wraz ze wzrostem liczby grup o 1.000, czas wykonania wzrasta średnio ok. 6 sekund, natomiast w przypadku biblioteki "lme4" - o ok. 0.5 sekundy. **Nie ma więc co się dziwić, że konstrukcja modelu dla sztucznego zbioru danych z 1.000.000 obserwacji i 10.000 grup wyniosła ok. 100 sekund, a dla tego samego zbioru, ale dla biblioteki "lme4" - ok. 20 sekund.**
+Dla małej liczby obserwacji wzrost czasu wykonania jest niemal analogiczny do tego z języka Python.  Różnica jednak pojawia się z napływem coraz to większej liczby obserwacji. ***Nie ma więc co się dziwić, że konstrukcja modelu dla sztucznego zbioru danych z 1.000.000 obserwacji i 10.000 grup wyniosła ok. 100 sekund, a dla tego samego zbioru, ale dla biblioteki "lme4" - ok. 20 sekund.**
 
 
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i biblioteki "nlme":**
@@ -381,10 +381,10 @@ Multiple R-squared:  0.9482,	Adjusted R-squared:  0.9477
 F-statistic:  1799 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-W przypadku funkcji "lmer()" z biblioteki "nlme" również zauważa się dodatnią korelację między liczbą obserwacji, grup, a czasem wykonania. Można to zapisać następującym równaniem:<br />
+W przypadku funkcji "lmer()" z biblioteki "nlme" również zauważa się dodatnią korelację między liczbą obserwacji, a czasem wykonania, a dodatkowo również liczbą grup. Można to przedstawić następującym równaniem:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas (nlme)} = 0.00001213 * X_{L. obserwacji} %2B 0.0001632 * X_{L. grup}">
 
-Przyrównując do biblioteki "lme4", czas wykonania modelu przy stałej liczbie obserwacji dla obu bibliotek różni się nieznacznie - o ok. 12%. Jednakże różnica przy uwzględnieniu liczby grup jest już diametralna, ponieważ **przy tej samej liczbie grup dla obydwu bibliotek czas konstrukcji dla "lme4" jest niemal 3-krotnie większy od czasu konstrukcji "nlme.**
+**Przyrównując do biblioteki "lme4", czas wykonania modelu przy stałej liczbie obserwacji dla obu bibliotek różni się o ok. 25%**. Z racji tego, że obserwacji w zbiorze jest zazwyczaj o wiele więcej niż grup, to właśnie biblioteka "nlme" jest szybsza od "lme4", nawet przy 10.000 grup.
 
 
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i biblioteki "mgcv":**
@@ -416,9 +416,9 @@ Funkcja "bam()" z biblioteki "mgcv" wydaje się funkcjonować względnie wolno d
 
 Dla porównania, **przy tej samej liczbie obserwacji (nie uwzględniając grup), czas wykonania jest ponad 5-krotnie mniejszy od biblioteki "lme4" i "nlme".** Uwzględniając grupy (bez uwzględniania liczby obserwacji), czas konstrukcji z użyciem tej biblioteki w porównaniu z biblioteką "lme4" jest ponad 6-krotnie mniejszy, natomiast w porównaniu z "nlme" - 2-krotnie. **Złożenie liczby obserwacji z liczbą grup z kolei składa się na jeszcze mniejszy czas wykonywania.**
 
-![enter image description here](https://i.imgur.com/HKL4Fo7.png)
+![enter image description here](https://i.imgur.com/2qdbof7.png)
 
-**Biblioteka "lme4" jest bardziej wrażliwa na wydłużenie czasu konstrukcji w ramach zwiększania stopnia złożoności modelu, tj. liczby grup.** Niewątpliwie jest ona efektywna dla małych zbiorów danych o niewielkiej złożoności grupowej bądź też dużych zbiorów danych, ale w dalszym ciągu o niewielkiej złożoności grupowej. **Dla danych wielkoskalowych efektywna wydaje się być biblioteka "mgcv"** - wzrost czasu wykonywania spowodowany wzrostem liczby obserwacji i/lub grup jest wprawdzie istotny, ale nieznaczący dla obliczeń.
+**Dla danych wielkoskalowych efektywna wydaje się być biblioteka "mgcv"** - wzrost czasu wykonywania spowodowany wzrostem liczby obserwacji i/lub grup jest wprawdzie istotny, ale małoznaczący dla obliczeń.
 
 
 ## 3. RAM
