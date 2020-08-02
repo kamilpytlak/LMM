@@ -23,7 +23,7 @@ Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Pyth
 			- [Opis zbiorów danych](#opis-zbiorów-danych)
 			- [Czas wykonania](#czas-wykonania)
 			- [RAM](#ram)
-4. [Wnioski](#wnioski)
+4. [Wnioski](#4-wnioski)
 
 
 ## Liniowe modele w statystyce
@@ -174,7 +174,7 @@ Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wyko
 
 
 
-## Wnioski
+## 4. Wnioski
 Analizy przeprowadzone nad dużym (milionowym), a także wieloma innymi kombinacjami zbiorów danych dostarczają istotnych spostrzeżeń w zakresie podobieństwa i różnic dla określania tego samego modelu mieszanego, ale z użyciem różnych języków (tu: Python i R) i metod (tu: deklaracja z użyciem formuły i macierzy dla Python i bibliotek "lme4", "nlme" i "mgcv" w R). Trzeba podkreślić, że w dużej mierze nie są ważne liczby, ponieważ zależą one od mocy obliczeniowej komputera, w związku z czym na dwóch różnych maszynach mogą się one całkowicie różne - z użyciem nawet tego samego bloku instrukcji i działań - **ale na największą uwagę zasługują proporcje między różnymi czynnikami, bo to one właśnie stanowią o możliwościach danej metody/biblioteki.** Ponadto, w niniejszej pracy nacisk położono na nierozbudowany model, tzn. z jednym efektem stałym i jednym losowym, ale z dokładnym zbadaniem wpływu liczby obserwacji i grup (jak i interakcji) na czas konstrukcji modelu i przydział RAM-u. Choć nie zostało to szerzej opisane, to wykryto także istotny i duży wpływ liczby parametrów modelu (przede wszystkim efektów losowych) na czas wykonywania - nie zostało to dokładniej sprawdzone ze względu na długi czas oczekiwania konstrukcji jednego zbioru danych o kilkudziesięciu obserwacjach, wynoszącego nawet kilkadziesiąt minut. Podsumowując:
 
  - **Dla języka Python istotne znaczenie na czas wykonywania modelu ma liczba grup** - wraz ze stopniem złożoności grupowej zbioru, spodziewać się można długiego czasu oczekiwania (rzędu kilkudziesięciu, a nawet kilkuset sekund - jeśli rozpatrywany byłby duży zbiór danych). **Deklaracja modelu za pomocą macierzy wydaje się mieć lepszy wpływ, jeśli chodzi o czas wykonania (tu w minimalnym stopniu) i przydzielaną pamięć operacyjną.**  **Python dostarcza także wartości p dla współczynników i przedziały ufności**, czego nie zapewniają biblioteki "lme4" (wartości p i przedziałów ufności), "nlme" (przedziałów ufności) i "mgcv" (przedziałów ufności). Python jest językiem oszczędnym, jeśli mowa o przydzielanej na dopasowanie modeli pamięci operacyjnej.
