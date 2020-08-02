@@ -15,8 +15,8 @@ Wybierając pomiędzy językami Python, R i danymi deklaracjami/bibliotekami, na
 	- [Implementacja metod statystycznych](#implementacja-metod-statystycznych)
 3. [Porównanie efektywności algorytmów LMM](#3-porównanie-efektywności-algorytmów-lmm)
 	- [Metodyka](#31-metodyka)
-	- [Wyniki](#wyniki)
-		- [Zbiór danych "cows"](#zbiór-danych-cows)
+	- [Wyniki](#32-wyniki)
+		- [Zbiór danych "cows"](#321-zbiór-danych-cows)
 			- [Opis zbioru danych](#opis-zbioru-danych)
 			- [Czas wykonania](#czas-wykonania)
 			- [RAM](#ram)
@@ -154,14 +154,14 @@ Szczegółowe analizy (wraz z wynikami) dla zbioru danych "cows" znaleźć możn
 Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wykorzystaniem bibliotek "dplyr", "ggplot2" i "FSA". Na podstawie wykresów pudełkowych zestawiono czas wykonywania funkcji wszystkich bibliotek i deklaracji obydwu języków, a także pojedyncze dla każdego języka i poszczególnych kombinacji bibliotek. Porównano średnie czasy konstrukcji modelu za pomocą deklaracji formuły i macierzy w języku Python z wykorzystaniem testu Wilcoxona, ponieważ przeprowadzony test Shapiro-Wilka stwierdził, że rozkład wartości deklaracji formuły nie jest normalny. Porównano także średnie czasy wszystkich bibliotek/deklaracji w obrębie dwóch języków, przeprowadzając test Kruskala-Wallisa, a w celu uzyskania szczegółów - Dunneta.
 
 
-### Wyniki
-#### Zbiór danych "cows"
+### 3.2 Wyniki
+#### 3.2.1 Zbiór danych "cows"
 
-##### Opis zbioru danych
+##### 3.2.2 Opis zbioru danych
 
-##### Czas wykonania
+##### 3.2.3 Czas wykonania
 
-##### RAM
+##### 3.2.4 RAM
 
 
 
