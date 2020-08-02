@@ -19,12 +19,10 @@ Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Pyth
 			- [Opis zbioru danych](#opis-zbioru-danych)
 			- [Czas wykonania](#czas-wykonania)
 			- [RAM](#ram)
-			- [Rezultaty](#rezultaty)
 		- [Symulacje](#symulacje)
 			- [Opis zbiorów danych](#opis-zbiorów-danych)
 			- [Czas wykonania](#czas-wykonania)
 			- [RAM](#ram)
-			- [Rezultaty](#rezultaty)
 	4. [Wnioski](#wnioski)
 
 
@@ -164,7 +162,7 @@ Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wyko
 
 #### RAM
 
-#### Rezultaty
+
 
 
 ### Symulacje
@@ -174,6 +172,17 @@ Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wyko
 
 #### RAM
 
-#### Rezultaty
+
 
 ## Wnioski
+Analizy przeprowadzone nad dużym (milionowym), a także wieloma innymi kombinacjami zbiorów danych dostarczają istotnych spostrzeżeń w zakresie podobieństwa i różnic dla określania tego samego modelu mieszanego, ale z użyciem różnych języków (tu: Python i R) i metod (tu: deklaracja z użyciem formuły i macierzy dla Python i bibliotek "lme4", "nlme" i "mgcv" w R). Trzeba podkreślić, że w dużej mierze nie są ważne liczby, ponieważ zależą one od mocy obliczeniowej komputera, w związku z czym na dwóch różnych maszynach mogą się one całkowicie różne - z użyciem nawet tego samego bloku instrukcji i działań - **ale na największą uwagę zasługują proporcje między różnymi czynnikami, bo to one właśnie stanowią o możliwościach danej metody/biblioteki.** Ponadto, w niniejszej pracy nacisk położono na nierozbudowany model, tzn. z jednym efektem stałym i jednym losowym, ale z dokładnym zbadaniem wpływu liczby obserwacji i grup (jak i interakcji) na czas konstrukcji modelu i przydział RAM-u. Choć nie zostało to szerzej opisane, to wykryto także istotny i duży wpływ liczby parametrów modelu (przede wszystkim efektów losowych) na czas wykonywania - nie zostało to dokładniej sprawdzone ze względu na długi czas oczekiwania konstrukcji jednego zbioru danych o kilkudziesięciu obserwacjach, wynoszącego nawet kilkadziesiąt minut. Podsumowując:
+
+ - **Dla języka Python istotne znaczenie na czas wykonywania modelu ma liczba grup** - wraz ze stopniem złożoności grupowej zbioru, spodziewać się można długiego czasu oczekiwania (rzędu kilkudziesięciu, a nawet kilkuset sekund - jeśli rozpatrywany byłby duży zbiór danych). **Deklaracja modelu za pomocą macierzy wydaje się mieć lepszy wpływ, jeśli chodzi o czas wykonania (tu w minimalnym stopniu) i przydzielaną pamięć operacyjną.**  **Python dostarcza także wartości p dla współczynników i przedziały ufności**, czego nie zapewniają biblioteki "lme4" (wartości p i przedziałów ufności), "nlme" (przedziałów ufności) i "mgcv" (przedziałów ufności). Python jest językiem oszczędnym, jeśli mowa o przydzielanej na dopasowanie modeli pamięci operacyjnej.
+ - Dla języka R, podczas analizy względnie małych zbiorów danych (do 200.000) i niskiej złożoności grupowej (do 1.000) warto rozważyć wybór pomiędzy bibliotekami "lme4" a "nlme", ponieważ "mgcv", pomimo użycia fREML, stabilizuje swój czas wykonywania dla obserwacji wynoszących ok. powyżej 300.000. Biblioteka "lme4" miała przewagę nad "nlme" dla niewielkich objętościowo zbiorów danych (do kilku tysięcy) i dużej złożoności grupowej. **Również biblioteka "mgcv" jest oszczędna w kwestii użytkowanej pamięci RAM na konstrukcję modelu, gdzie biblioteka "nlme" zużywa jej najwięcej spośród badanych.** 
+
+Biblioteka "mgcv" w R wydaje się zatem dobrą alternatywą w zestawieniu z pozostałymi bibliotekami języka R i deklaracji z "statsmodel" języka Python, jeśli analizowany zbiór danych jest duży (od ok. 300.000 obserwacji) lub kiedy występują problemy z pamięcią. Używana metoda estymacji fREML również jest efektywna dla struktur o skomplikowanej złożoności - z wieloma klastrami. Głównym problemem funkcji "bam()" jest jednak nie liczba obserwacji, a parametrów do oszacowania. Pomimo zastosowanej w 4/5 przypadków tej samej metody estymacji (REML) różnice w czasach wykonywania (jak i alokowanej pamięci RAM) wynikają nie tyle, ile z weryfikowanych tu liczby obserwacji, grup i możliwe interakcji między czynnikami, a (idąc głębiej) używanej metody optymalizacji. Przykładowo, funkcja "lmer()" z biblioteki "lme4" w R estymuje parametry na podstawie optymalizacji profilowania log-wiarygodności w odniesieniu do macierzy kowariancji dla efektów losowych. Oznacza to, że wraz ze wzrostem liczby estymowanych parametrów, rozmiar macierzy zostaje równorzędnie zwiększany, a w ostateczności i czas wykonania. Aby znacząco przyspieszyć oczekiwanie, można zmienić ustawienia optymalizatora, np. dla "lme4" w "lmer()" dla:
+```r
+[g]lmerControl(calc.derivs = FALSE)
+```
+zostanie wyłączona opcja obliczania pochodnej po optymalizacji, ale z kolei przełoży się to na dokładność obliczeń. 
+Wybierając pomiędzy językami Python i R, a także pomiędzy poszczególnymi deklaracjami/bibliotekami w nich zawartymi, należy zwrócić uwagę na strukturę posiadanego zbioru danych, a przede wszystkim jego objętość. Dla zbiorów małolicznych zasadne wydaje się użycie dowolnej. Trzeba też zwrócić uwagę na rezultat, tzn. biblioteka "lme4" nie zapewnia wartości p dla parametrów - takowe trzeba "własnoręcznie" oszacować, korzystając np. z testu Walda bądź też za pomocą zewnętrznych, dopełniających bibliotek, np. "lmerTest". Nie należy jednak się zbytnio rozwodzić nad wyborem języka/deklaracji/biblioteki, ponieważ koniec końców może się okazać, że przemyślenia i próby implementacji zajmą więcej czasu niż sama konstrukcja (która wcale dużo czasu może nie kosztować). Jeśli występują problemy z niedostateczną ilością pamięci RAM, warto strukturę zaimplementować do języka Python. Zaawansowanym użytkownikom poleca się skorzystanie z innych języków programowania (np. Julia) bądź skorzystanie z obliczeń równoległych pozwalających na użycie większej liczby rdzeni procesora (np. biblioteka "paralell" w języku R).
