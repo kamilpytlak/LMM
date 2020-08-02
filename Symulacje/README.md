@@ -9,7 +9,7 @@
 
 ## 1. Opis zbiorów danych
 W języku R wygenerowano kilka zestawów zbiorów danych o następujących właściwościach:
- - od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmiennymi objaśniającymi "x_1", "x_2", "x_3" i dwiema zmiennymi grupującymi: "g_1" (25 grup) i g_2 (1.000 grup),
+ - od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmiennymi objaśniającymi "x_1", "x_2", "x_3" i dwiema zmiennymi grupującymi: "g_1" (100 grup) i g_2 (1.000 grup),
  -   od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y",  zmienną objaśniającą "x_1" i jedną zmienną grupującą: "g_1" (1.000 grup),
  - od 20.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmienną objaśniającą "x_1" i jedną zmienną grupującą: "g_1" (10.000 grup).
  - 1 zbiór danych z 1.000.000 obserwacji, ze zmienną objaśnianą "y", zmienną objaśniającą "x0" i jedną zmienną grupującą "fac" (4 grupy) z użyciem funkcji "gamSim()" z biblioteki "mgcv".
@@ -161,15 +161,15 @@ Podejście funkcji "bam()" do estymacji parametrów mieszanego modelu liniowego 
 
 
 ### 2.2 Dla symulacji-kombinacji
-Bazując na wielu różnych kombinacjach liczby obserwacji-grup sztucznie wygenerowanych zbiorów, sprawdzano wpływ liczby obserwacji, liczby grup, a także liczby obserwacji i liczby grup w interakcji na czas konstrukcji modelu w zależności od danej deklaracji/biblioteki. Same kombinacje zostały zaprojektowane w taki sposób, by każdy z zestawów uwzględniał od 10.000 do 1.000.000 obserwacji (z przeskokiem co 10.000) i zawierał po: 25, 1000 i 10000 grup, przykładowo:
+Bazując na wielu różnych kombinacjach liczby obserwacji-grup sztucznie wygenerowanych zbiorów, sprawdzano wpływ liczby obserwacji, liczby grup, a także liczby obserwacji i liczby grup w interakcji na czas konstrukcji modelu w zależności od danej deklaracji/biblioteki. Same kombinacje zostały zaprojektowane w taki sposób, by każdy z zestawów uwzględniał od 10.000 do 1.000.000 obserwacji (z przeskokiem co 10.000) i zawierał po: 100, 1000 i 10000 grup, przykładowo:
 | Liczba_obserwacji | Liczba_grup | Czas_wykonania | Biblioteka |   RAM   |
 |:-----------------:|:-----------:|:--------------:|:----------:|:-------:|
-|       10000       |      25     |     0.0959     |    lme4    | 14.3831 |
-|       20000       |      25     |     0.1580     |    lme4    | 28.6927 |
-|       30000       |      25     |     0.2302     |    lme4    | 41.8227 |
-|       40000       |      25     |     0.3035     |    lme4    | 57.3128 |
-|       50000       |      25     |     0.3971     |    lme4    | 70.4420 |
-|       60000       |      25     |     0.4710     |    lme4    | 83.5720 |
+|       10000       |      100     |     0.0959     |    lme4    | 14.3831 |
+|       20000       |      100     |     0.1580     |    lme4    | 28.6927 |
+|       30000       |      100     |     0.2302     |    lme4    | 41.8227 |
+|       40000       |      100     |     0.3035     |    lme4    | 57.3128 |
+|       50000       |      100     |     0.3971     |    lme4    | 70.4420 |
+|       60000       |      100     |     0.4710     |    lme4    | 83.5720 |
 
 W tej części analizy skupione były wokół modelu liniowego. Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas} = B_{L. obserwacji} * X_{L. obserwacji} %2B B_{L. grup} * X_{L. grup} %2B B_{L.obserwacji:L.grup} * X_{L. obserwacji} * X_{L. grup}">
@@ -435,7 +435,7 @@ Multiple R-squared:  0.9324,	Adjusted R-squared:  0.9317
 F-statistic:  1357 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać:
+Co można zapisać:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (formula)} = 0.0001263 * X_{L. obserwacji} %2B 0.001652 * X_{L. grup} - 0.000000005871 * X_{L. obserwacji} * X_{L. grup} - 5.454">
 
 **Dla deklaracji formułą wszystkie badane czynniki miały istotny wpływ na użytą pamięć operacyjną**. **Największy wpływ ma liczba grup**: już z 1.000 obserwacji (bez uwzględniania obserwacji) alokacja RAM-u wzrasta o 1.652 sekundy. Z kolei wzrost liczby obserwacji o 100.000 (bez uwzględniania grup) powoduje przyrost zużytego RAM-u o 12.63 sekundy.
@@ -464,7 +464,7 @@ Multiple R-squared:  0.8689,	Adjusted R-squared:  0.8675
 F-statistic: 649.4 on 3 and 294 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać:
+Co można zapisać:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (macierz)} = 0.00009995 * X_{L. obserwacji} %2B 0.0007433 * X_{L. grup} -0.00000000373 * X_{L. obserwacji} * X_{L. grup} - 0.1263">
 
 Dla deklaracji macierzą również wszystkie badane czynniki mają istotny wpływ na zużycie RAM-u. **W zależności od liczby obserwacji, zużycie jest o ok. 30% mniejsze niż w przypadku deklaracji formułą.** 
@@ -501,7 +501,7 @@ Multiple R-squared:  0.9994,	Adjusted R-squared:  0.9994
 F-statistic: 1.586e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać jako:
+Co można zapisać jako:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (lme4)} = 0.001399 * X_{L. obserwacji} %2B 0.00168 * X_{L. grup} %2B 5.703">
 
 Wraz ze wzrostem liczby obserwacji o 100.000, zużycie RAM-u wzrasta o 139.9 MB - w przypadku takiej samej ilości, ale dla grup, jest to 168 MB.
@@ -530,7 +530,7 @@ Multiple R-squared:  0.9992,	Adjusted R-squared:  0.9992
 F-statistic: 1.168e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać jako:
+Co można zapisać jako:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (nlme)} = 0.001538 * X_{L. obserwacji} %2B 0.004822 * X_{L. grup} %2B 6.905">
 
 Co daje ok. 10%-owe większe zużycie dla takiej samej liczby obserwacji w zestawieniu z "lme4" i ok. 3-krotne większe zużycie dla takiej samej liczby grup.
@@ -559,7 +559,7 @@ Multiple R-squared:  0.9999,	Adjusted R-squared:  0.9999
 F-statistic: 9.559e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać jako:
+Co można zapisać jako:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (mgcv)} = 0.0009893 * X_{L. obserwacji} %2B 4.622">
 
 **Tylko liczba obserwacji ma wpływ na zużycie RAM-u przez funkcję "bam()"**. Ponadto, zużycie to jest mniejsze o ok. 40% dla takiej samej liczby obserwacji w porównaniu z biblioteką "lme4" i ok. 60% mniejsze w porównaniu z "nlme".
