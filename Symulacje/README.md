@@ -501,7 +501,7 @@ Multiple R-squared:  0.9994,	Adjusted R-squared:  0.9994
 F-statistic: 1.586e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać jako:<br />
+Co można zapisać jako:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (lme4)} = 0.001399 * X_{L. obserwacji} %2B 0.00168 * X_{L. grup} %2B 5.703">
 
 Wraz ze wzrostem liczby obserwacji o 100.000, zużycie RAM-u wzrasta o 139.9 MB - w przypadku takiej samej ilości, ale dla grup, jest to 168 MB.
@@ -530,7 +530,7 @@ Multiple R-squared:  0.9992,	Adjusted R-squared:  0.9992
 F-statistic: 1.168e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać jako:<br />
+Co można zapisać jako:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (nlme)} = 0.001538 * X_{L. obserwacji} %2B 0.004822 * X_{L. grup} %2B 6.905">
 
 Co daje ok. 10%-owe większe zużycie dla takiej samej liczby obserwacji w zestawieniu z "lme4" i ok. 3-krotne większe zużycie dla takiej samej liczby grup.
@@ -559,7 +559,7 @@ Multiple R-squared:  0.9999,	Adjusted R-squared:  0.9999
 F-statistic: 9.559e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać jako:<br />
+Co można zapisać jako:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (mgcv)} = 0.0009893 * X_{L. obserwacji} %2B 4.622">
 
 **Tylko liczba obserwacji ma wpływ na zużycie RAM-u przez funkcję "bam()"**. Ponadto, zużycie to jest mniejsze o ok. 40% dla takiej samej liczby obserwacji w porównaniu z biblioteką "lme4" i ok. 60% mniejsze w porównaniu z "nlme".
