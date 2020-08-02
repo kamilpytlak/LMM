@@ -168,6 +168,39 @@ Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wyko
 
 #### 3.2.2 Symulacje
 ##### 3.2.2.1 Opis zbiorów danych
+##### Opis zbiorów danych
+W języku R wygenerowano kilka zestawów zbiorów danych o następujących właściwościach:
+ - od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmiennymi objaśniającymi "x_1", "x_2", "x_3" i dwiema zmiennymi grupującymi: "g_1" (100 grup) i g_2 (1.000 grup),
+ -   od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y",  zmienną objaśniającą "x_1" i jedną zmienną grupującą: "g_1" (1.000 grup),
+ - od 20.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmienną objaśniającą "x_1" i jedną zmienną grupującą: "g_1" (10.000 grup).
+ - 1 zbiór danych z 1.000.000 obserwacji, ze zmienną objaśnianą "y", zmienną objaśniającą "x0" i jedną zmienną grupującą "fac" (4 grupy) z użyciem funkcji "gamSim()" z biblioteki "mgcv".
+
+**Tak stworzone zestawy posłużyły do określenia wpływu objętości zbioru (liczby obserwacji), liczby grup, liczby parametrów, a także interakcji pomiędzy poszczególnymi czynnikami na czas wykonania modelu i użytą pamięć operacyjną.**
+
+Ogląd 6. pierwszych obserwacji z milionowego zbioru wygenerowanego z użyciem funkcji "gamSim()":
+|         y        |         x0         | fac |
+|:----------------:|:------------------:|:---:|
+| 11.5640116760671 |  0.319636012427509 |  1  |
+| 21.0272668936847 | 0.0188121555838734 |  2  |
+| 19.5681800055627 |  0.831518376944587 |  3  |
+| 19.4919352004216 |  0.152270128484815 |  4  |
+| 12.1072589322815 |  0.778154832078144 |  1  |
+| 16.6358024128427 |  0.775473831919953 |  2  |
+
+<br />
+
+Następujący model można zatem przedstawić w formie równania:<br />
+<img src="https://render.githubusercontent.com/render/math?math=y = X_{0} * \beta_{0} %2B Z_{fac} * u_{fac} %2B \epsilon"><br />
+, gdzie:
+- <img src="https://render.githubusercontent.com/render/math?math=y"> jest wektorem obserwacji ze średnią <img src="https://render.githubusercontent.com/render/math?math=E(y) = X_{0} * \beta_{0}"> (zmienna zależna)
+ - <img src="https://render.githubusercontent.com/render/math?math=X_{0}"> i <img src="https://render.githubusercontent.com/render/math?math=Z_{fac}"> znanymi macierzami projektowymi składającymi się z realizacji opisywanych czynników,
+ -  <img src="https://render.githubusercontent.com/render/math?math=\beta_{0}"> nieznanym wektorem efektów stałych,
+ - <img src="https://render.githubusercontent.com/render/math?math=u_{fac}"> nieznanym wektorem efektów losowych ze średnią <img src="https://render.githubusercontent.com/render/math?math=E(u) = 0">,
+ - <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> nieznanym wektorem zakłóceń losowych o średniej <img src="https://render.githubusercontent.com/render/math?math=E({\epsilon}) = 0">.<br />
+<br />
+
+
+
 
 ##### 3.2.2.2 Czas wykonania
 
