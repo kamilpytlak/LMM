@@ -157,18 +157,18 @@ Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wyko
 ### 3.2 Wyniki
 #### 3.2.1 Zbiór danych "cows"
 
-##### 3.2.1.1 Opis zbioru danych
+#### 3.2.1.1 Opis zbioru danych
 
-##### 3.2.1.2 Czas wykonania
+#### 3.2.1.2 Czas wykonania
 
-##### 3.2.1.3 RAM
+#### 3.2.1.3 RAM
 
 
 
 
 #### 3.2.2 Symulacje
-##### 3.2.2.1 Opis zbiorów danych
-##### Opis zbiorów danych
+#### 3.2.2.1 Opis zbiorów danych
+#### Opis zbiorów danych
 W języku R wygenerowano kilka zestawów zbiorów danych o następujących właściwościach:
  - od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmiennymi objaśniającymi "x_1", "x_2", "x_3" i dwiema zmiennymi grupującymi: "g_1" (100 grup) i g_2 (1.000 grup),
  -   od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y",  zmienną objaśniającą "x_1" i jedną zmienną grupującą: "g_1" (1.000 grup),
