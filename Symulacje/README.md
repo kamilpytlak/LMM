@@ -12,7 +12,7 @@ W języku R wygenerowano kilka zestawów zbiorów danych o następujących wła�
  - od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmiennymi objaśniającymi "x_1", "x_2", "x_3" i dwiema zmiennymi grupującymi: "g_1" (25 grup) i g_2 (1.000 grup),
  -   od 10.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y",  zmienną objaśniającą "x_1" i jedną zmienną grupującą: "g_1" (1.000 grup),
  - od 20.000 do 1.000.000 obserwacji (co 10.000) ze zmienną objaśnianą "y", zmienną objaśniającą "x_1" i jedną zmienną grupującą: "g_1" (10.000 grup).
- - 1 zbiór danych z 1.000.000 obserwacji, ze zmienną objaśnianą "y", zmienną objaśniającą "x0" i jedną zmienną grupującą "fac" (4 grupy), używając funkcji "gamSim()" z biblioteki "mgcv".
+ - 1 zbiór danych z 1.000.000 obserwacji, ze zmienną objaśnianą "y", zmienną objaśniającą "x0" i jedną zmienną grupującą "fac" (4 grupy) z użyciem funkcji "gamSim()" z biblioteki "mgcv".
 
 **Tak stworzone zestawy posłużyły do określenia wpływu objętości zbioru (liczby obserwacji), liczby grup, liczby parametrów, a także interakcji pomiędzy poszczególnymi czynnikami na czas wykonania modelu i użytą pamięć operacyjną.**
 
@@ -143,7 +143,7 @@ Wykres pudełkowy wyraźnie uwidacznia dużą rozbieżność pomiędzy czasami w
 
 ![Wykres rozrzutu czasów wykonywania modelu w zależności od jego konstrukcji dla języka R](https://i.imgur.com/Dqn13R4.png)
 
-Z pomocą wbudowanego w program RStudio profilera czasu i przeznaczanej pamięci RAM dodatkowo sprawdzono stos wywołań każdej funkcji, w szczególności doszukiwano wywołań o przeważającym czasie wykonania. Rezultaty dostępne są w formie aplikacji w RPubs: [https://rpubs.com/kamilpytlak/LMM_1e6](https://rpubs.com/kamilpytlak/LMM_1e6)<br />
+Z pomocą wbudowanego w program RStudio profilera czasu i przeznaczanej pamięci RAM dodatkowo sprawdzono stos wywołań każdej funkcji, w szczególności doszukiwano się wywołań o przeważającym czasie wykonania. Rezultaty dostępne są w formie aplikacji w RPubs: [https://rpubs.com/kamilpytlak/LMM_1e6](https://rpubs.com/kamilpytlak/LMM_1e6)<br />
 
 *Dla funkcji "lmer()" z biblioteki "lme4"*
 
@@ -155,7 +155,7 @@ Z pomocą wbudowanego w program RStudio profilera czasu i przeznaczanej pamięci
 
 *Dla funkcji "bam()" z biblioteki "mgcv"*
 
-Podejście funkcji "bam()" do estymacji parametrów mieszanego modelu liniowego różni się diametralnie od stosowanych przez dwie pozostałe biblioteki metod. Przede wszystkim, biblioteka "mgcv" została stworzona z myślą o pracy nad dużymi zbiorami danych, stąd też domyślną metodą estymacji parametrów dla funkcji "bam()" jest nie REML, a fREML. **W przypadku analizowanego zbioru danych funkcja ta na całość wykonania zużyła najmniej czasu - 2.8 sek**.
+Podejście funkcji "bam()" do estymacji parametrów mieszanego modelu liniowego różni się diametralnie od stosowanych przez dwie pozostałe biblioteki metod. Przede wszystkim, biblioteka "mgcv" została stworzona z myślą o pracy nad dużymi zbiorami danych, stąd też domyślną metodą estymacji parametrów dla funkcji "bam()" jest nie REML, a fREML. **W przypadku analizowanego zbioru danych funkcja ta na całość wykonania zużyła najmniej czasu - 2.8 sek.**
 
 
 
@@ -203,7 +203,7 @@ Wszystkie badane czynniki mają dodatni wpływ na czas wykonywania modelu - zar�
 
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas (formula)} = 0.00001134 * X_{L. obserwacji} %2B  0.006288 * X_{L. grup} %2B 0.0000000007805 * X_{L. obserwacji} * X_{L. grup}">
 
-Dla minimalnego wzrostu liczby obserwacji czy grup (rzędów jedności) różnice wydają się być minimalne. Jednak już dla wielkoskalowych danych, różnice są już znaczące, np. dla 100.000 obserwacji (bez uwzględniania grup) jest to przyrost o 1.134 sekundy. **Uwzględniając grupy, czas wzrasta intensywniej, bowiem już nawet dla 1.000 grup (bez uwzględniania obserwacji) następuje przyrost o 6.288 sekund.**
+Dla minimalnego wzrostu liczby obserwacji czy grup (rzędów jedności) różnice wydają się minimalne. Jednak już dla wielkoskalowych danych, różnice są już znaczące, np. dla 100.000 obserwacji (bez uwzględniania grup) jest to przyrost o 1.134 sekundy. **Uwzględniając grupy, czas wzrasta intensywniej -  już nawet dla 1.000 grup (bez uwzględniania obserwacji) następuje przyrost o 6.288 sekund.**
 
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i metody "matrix":**
 ```python
@@ -233,7 +233,7 @@ W przypadku macierzy również wszystkie badane komponenty mają dodatni wpływ 
 
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas (matrix)} = 0.00001108 * X_{L. obserwacji} %2B  0.006309 * X_{L. grup} %2B 0.0000000006653 * X_{L. obserwacji} * X_{L. grup} %2B 1.21">
 
-Średni czas konstrukcji modeli z wykorzystaniem macierzy jest mniejszy od średniego czasu z wykorzystaniem formuły o ok. 2.3%. Oznacza to, że dla zbioru danych z 1.000.000 obserwacjami szacunkowo w przypadku formuły operacja zajmie 10.1 sekundy, a dla macierzy - 10.33 sekund, więc ta różnica wydaje się być minimalna i nieznacząca. Inaczej jednak jest, mając na uwadze liczbę grup - tu wraz ze wzrostem liczby grup o 1000, czas wykonywania wzrasta o 6.309 sekund, natomiast dla formuły byłoby to 6.288 sekund. **Dlatego w analizowanym przypadku jednego efektu stałego i losowego dla dwóch możliwych deklaracji modelu w języku Python, to nie liczba obserwacji, a liczba grup ma znaczący wpływ na rezultat.**
+Średni czas konstrukcji modeli z wykorzystaniem macierzy jest mniejszy od średniego czasu z wykorzystaniem formuły o ok. 2.3%. Oznacza to, że dla zbioru danych z 1.000.000 obserwacjami szacunkowo w przypadku formuły operacja zajmie 10.1 sekundy, a dla macierzy - 10.33 sekund, więc ta różnica wydaje się minimalna i nieznacząca. Inaczej jednak jest, mając na uwadze liczbę grup - tu wraz ze wzrostem liczby grup o 1000, czas wykonywania wzrasta o 6.309 sekund, natomiast dla formuły byłoby to 6.288 sekund. **Dlatego w analizowanym przypadku jednego efektu stałego i losowego dla dwóch możliwych deklaracji modelu w języku Python, to nie liczba obserwacji, a liczba grup ma znaczący wpływ na rezultat.**
 
 ![Wykres zależności czasu wykonania od liczby obserwacji, grup i deklaracji dla języka Python](https://i.imgur.com/jxYjlqC.png)
 
@@ -298,10 +298,10 @@ Multiple R-squared:  0.936,	Adjusted R-squared:  0.9354
 F-statistic:  1439 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-W przypadku funkcji "lme()" z biblioteki "nlme" również zauważa się dodatnią korelację między liczbą obserwacji, a czasem wykonania, a dodatkowo również liczbą grup. Można to przedstawić następującym równaniem:<br />
+W przypadku funkcji "lme()" z biblioteki "nlme" również zauważa się dodatnią korelację między liczbą obserwacji a czasem wykonania, a dodatkowo również liczbą grup. Można to przedstawić następującym równaniem:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas (nlme)} = 0.00001236 * X_{L. obserwacji} %2B 0.0001799 * X_{L. grup} - 3.618">
 
-**Przyrównując do biblioteki "lme4", czas wykonania modelu przy stałej liczbie obserwacji dla obu bibliotek różni się o ok. 40%**. Przewaga biblioteki "lme4" wydaje się być widoczna dla małych zbiorów danych - z względnie niskim stosunkiem liczby grup do liczby obserwacji. **Niemniej, z racji tego, że obserwacji w zbiorze jest na ogół o wiele więcej niż grup, różnice pomiędzy współczynnikami parametru liczby grup każą przypuszczać, że czas wykonywania funkcji z biblioteki "nlme" jest niższy niż "lme4".**
+**Przyrównując do biblioteki "lme4", czas wykonania modelu przy stałej liczbie obserwacji dla obu bibliotek różni się o ok. 40%**. Przewaga biblioteki "lme4" wydaje się widoczna dla małych zbiorów danych - ze względnie niskim stosunkiem liczby grup do liczby obserwacji. **Niemniej, z racji tego, że obserwacji w zbiorze jest na ogół o wiele więcej niż grup, różnice pomiędzy współczynnikami parametru liczby grup każą przypuszczać, że czas wykonywania funkcji z biblioteki "nlme" jest niższy niż "lme4".**
 
 
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i biblioteki "mgcv":**
@@ -335,20 +335,20 @@ Dla porównania, **przy tej samej liczbie obserwacji (nie uwzględniając grup),
 
 ![enter image description here](https://i.imgur.com/QBGza5P.png)
 
-**Dla danych wielkoskalowych efektywna wydaje się być biblioteka "mgcv"** - wzrost czasu wykonywania spowodowany wzrostem liczby obserwacji i/lub grup jest wprawdzie istotny, ale małoznaczący dla obliczeń.
+**Dla danych wielkoskalowych efektywna wydaje się biblioteka "mgcv"** - wzrost czasu wykonywania spowodowany wzrostem liczby obserwacji lub grup jest wprawdzie istotny, ale małoznaczący dla obliczeń.
 
 ![Wykres 3D zależności liczby obserwacji i liczby grup na czas wykonania dla języka R](https://i.imgur.com/Kwh1fHL.png)
 
-**Czas konstrukcji modelu z użyciem funkcji "bam()" z biblioteki "mgcv" już od ok. 300.000 obserwacji jest znacznie niższy niż w przypadku funkcji "lmer()" czy "lme()"**. Po uwzględnieniu grup (przy stałej liczbie obserwacji dla pozostałych bibliotek) czas wykonywania także nie wzrasta szybciej w porównaniu z "lme4" czy "nlme". Dla niewielkich zbiorów danych (mniejszych od 200.000) czas działania jest większy z porównaniu z dwiema pozostałymi bibliotekami.
+**Czas konstrukcji modelu z użyciem funkcji "bam()" z biblioteki "mgcv" już od ok. 300.000 obserwacji jest znacznie niższy niż w przypadku funkcji "lmer()" czy "lme()"**. Po uwzględnieniu grup (przy stałej liczbie obserwacji dla pozostałych bibliotek) czas wykonywania także nie wzrasta szybciej w porównaniu z "lme4" czy "nlme". Dla niewielkich zbiorów danych (mniejszych od 200.000) czas działania jest większy w porównaniu z dwiema pozostałymi bibliotekami.
 
 
 ## 3. RAM
 Dla jednego zbioru milionowego użyty w celu wykonania konstrukcji RAM został oszacowany jednokrotnie - zarówno dla języka Python, jak i R - z użyciem odpowiednich profilerów.
-Dla wielu różnych kombinacji-zestawów, podobnie jak z czasami wykonywania, wartości użytego RAMu zebrane zostały do pliku "Interakcje": [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv). W R zsumowane zostały wartości przeznaczane na każdy proces, a wynikła suma (w bajtach) została zamieniona na megabajty. W języku Python wartości te pierwotnie są podawane w mebibajtach, dlatego w celu ujednolicenia również zostały zamienione na megabajty.
+Dla wielu różnych kombinacji-zestawów, podobnie jak z czasami wykonywania, wartości użytego RAM-u zebrane zostały do pliku "Interakcje": [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv). W R zsumowane zostały wartości przeznaczane na każdy proces, a wynikła suma (w bajtach) została zamieniona na megabajty. W języku Python wartości te pierwotnie są podawane w mebibajtach, dlatego w celu ujednolicenia również zostały zamienione na megabajty.
 
 ### 3.1 Dla zbioru milionowego
 #### 3.1.1 Python
-*Szczegółowe analizy dot. użytego RAMu w języku Python*: [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb)
+*Szczegółowe analizy dot. użytego RAM-u w języku Python*: [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/Python.ipynb)
 
 Na początku RAM oszacowano z wykorzystaniem jednej z "IPython Magic Commands" w Jupyter Notebook:
 ```python
@@ -372,7 +372,7 @@ Z użyciem biblioteki "memory_profiler" w programie PyCharm szczegółowo sprawd
 32                                     return LMMF_matrix
 ```
 
-![Wykres zależności użytego RAMu od czasu w języku Python - "formula"](https://i.imgur.com/2NSlowT.png)
+![Wykres zależności użytego RAM-u od czasu w języku Python - "formula"](https://i.imgur.com/2NSlowT.png)
 
 Natomiast dla macierzy:
 ```python
@@ -389,13 +389,13 @@ Natomiast dla macierzy:
 32    255.8 MiB      0.0 MiB           return LMMF_matrix
 ```
 
-![Wykres zależności użytego RAMu od czasu w języku Python - "matrix"](https://i.imgur.com/4Rp1fCy.png)
+![Wykres zależności użytego RAM-u od czasu w języku Python - "matrix"](https://i.imgur.com/4Rp1fCy.png)
 
-Choć w tym przypadku deklaracją z użyciem macierzy zużywa mniej pamięci, to w **obu metodach najwięcej RAMu przeznaczanego jest na ogólną konstrukcję modelu, natomiast pozostała część (ok. 20%) na oszacowanie macierzy kowariancji, czyli jego dopasowanie.**
+Choć w tym przypadku deklaracją z użyciem macierzy zużywa mniej pamięci, to w **obu metodach najwięcej RAM-u przeznaczanego jest na ogólną konstrukcję modelu, natomiast pozostała część (ok. 20%) na oszacowanie macierzy kowariancji, czyli jego dopasowanie.**
 
 
 #### 3.1.2 R
-*Szczegółowe analizy dot. użytego RAMu w języku R:* [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/R.ipynb](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/R.ipynb)
+*Szczegółowe analizy dot. użytego RAM-u w języku R:* [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/R.ipynb](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/R.ipynb)
 
 Dla każdej z trzech bibliotek RAM oszacowany został z użyciem biblioteki "profmem". Wyniki przedstawiają się następująco:
 
@@ -405,13 +405,13 @@ Dla każdej z trzech bibliotek RAM oszacowany został z użyciem biblioteki "pro
 
 
 ### 3.2 Dla symulacji-kombinacji
-Podobnie jak z czasem wykonywania, aby oszacować zależność pomiędzy liczbą obserwacji, grup, a także liczbą obserwacji i grup w charakterze interakcji, zebrane zostały wartości (w MB) użytego RAMu na podstawie wielu różnych kombinacji. Dane zostały zgromadzone w pliku "Interakcje": [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv].
+Podobnie jak z czasem wykonywania, aby oszacować zależność pomiędzy liczbą obserwacji, grup, a także liczbą obserwacji i grup w charakterze interakcji, zebrane zostały wartości (w MB) użytego RAM-u na podstawie wielu różnych kombinacji. Dane zostały zgromadzone w pliku "Interakcje": [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv].
 
 Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:<br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec} = B_{L. obserwacji} * X_{L. obserwacji} %2B B_{L. grup} * X_{L. grup} %2B B_{L.obserwacji:L.grup} * X_{L. obserwacji} * X_{L. grup}">
 
 #### 3.2.1 Python
-**Model liniowy zależności użytego RAMu od liczby obserwacji, liczby grup i deklaracji formułą:**
+**Model liniowy zależności użytego RAM-u od liczby obserwacji, liczby grup i deklaracji formułą:**
 ```python
 Call:
 lm(formula = RAM ~ Liczba_obserwacji * Liczba_grup, data = interakcje %>% 
@@ -438,7 +438,7 @@ F-statistic:  1357 on 3 and 295 DF,  p-value: < 2.2e-16
 Co można zapisać:
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (formula)} = 0.0001263 * X_{L. obserwacji} %2B 0.001652 * X_{L. grup} - 0.000000005871 * X_{L. obserwacji} * X_{L. grup} - 5.454">
 
-**Dla deklaracji formułą wszystkie badane czynniki miały istotny wpływ na użytą pamięć operacyjną**. **Największy wpływ ma liczba grup**: już z 1.000 obserwacji (bez uwzględniania obserwacji) alokacja RAMu wzrasta o 1.652 sekundy. Z kolei wzrost liczby obserwacji o 100.000 (bez uwzględniania grup) powoduje przyrost zużytego RAMu o 12.63 sekundy.
+**Dla deklaracji formułą wszystkie badane czynniki miały istotny wpływ na użytą pamięć operacyjną**. **Największy wpływ ma liczba grup**: już z 1.000 obserwacji (bez uwzględniania obserwacji) alokacja RAM-u wzrasta o 1.652 sekundy. Z kolei wzrost liczby obserwacji o 100.000 (bez uwzględniania grup) powoduje przyrost zużytego RAM-u o 12.63 sekundy.
 
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i deklaracji macierzą:**
 ```python
@@ -467,13 +467,13 @@ F-statistic: 649.4 on 3 and 294 DF,  p-value: < 2.2e-16
 Co można zapisać:
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (macierz)} = 0.00009995 * X_{L. obserwacji} %2B 0.0007433 * X_{L. grup} -0.00000000373 * X_{L. obserwacji} * X_{L. grup} - 0.1263">
 
-Dla deklaracji macierzą również wszystkie badane czynniki mają istotny wpływ na zużycie RAMu. **W zależności od liczby obserwacji, zużycie jest o ok. 30% mniejsze niż w przypadku deklaracji formułą.** 
+Dla deklaracji macierzą również wszystkie badane czynniki mają istotny wpływ na zużycie RAM-u. **W zależności od liczby obserwacji, zużycie jest o ok. 30% mniejsze niż w przypadku deklaracji formułą.** 
 
-![Wykres zależności zużytego RAMu od liczby obserwacji i grup dla języka Python](https://i.imgur.com/X1gvrRE.png)
+![Wykres zależności zużytego RAM-u od liczby obserwacji i grup dla języka Python](https://i.imgur.com/X1gvrRE.png)
 
-**Na uwagę zasługuje fakt, że zużyty RAM w przypadku formuły nie przekracza 140 MB, natomiast w przypadku macierzy - 100 MB**.  Jest to ok. 10-krotnie mniejsza ilość w porównaniu z bibliotekami języka R, uwzględniając przy tym, że Python, oprócz zapewnienia wartości p, szacuje również przedziały ufności. Także trzeba zaznaczyć, że dla obu modeli wynikła istotna, ujemna zależność pomiędzy zużyciem RAMu a liczbą obserwacji i grup w charakterze interakcji. 
+**Na uwagę zasługuje fakt, że zużyty RAM w przypadku formuły nie przekracza 140 MB, natomiast w przypadku macierzy - 100 MB**.  Jest to ok. 10-krotnie mniejsza ilość w porównaniu z bibliotekami języka R, uwzględniając przy tym, że Python, oprócz zapewnienia wartości p, szacuje również przedziały ufności. Także trzeba zaznaczyć, że dla obu modeli wynikła istotna, ujemna zależność pomiędzy zużyciem RAM-u a liczbą obserwacji i grup w charakterze interakcji. 
 
-![Wykres 3D zależności zużytego RAMu od liczby obserwacji, grup i deklaracji dla języka Python](https://i.imgur.com/lzU2SJV.png)
+![Wykres 3D zależności zużytego RAM-u od liczby obserwacji, grup i deklaracji dla języka Python](https://i.imgur.com/lzU2SJV.png)
 
 
 #### 3.2.2 R
@@ -504,7 +504,7 @@ F-statistic: 1.586e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 Co można zapisać jako:
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (lme4)} = 0.001399 * X_{L. obserwacji} %2B 0.00168 * X_{L. grup} %2B 5.703">
 
-Wraz ze wzrostem liczby obserwacji o 100.000, zużycie RAMu wzrasta o 139.9 MB - w przypadku takiej samej ilości, ale dla grup, jest to 168 MB.
+Wraz ze wzrostem liczby obserwacji o 100.000, zużycie RAM-u wzrasta o 139.9 MB - w przypadku takiej samej ilości, ale dla grup, jest to 168 MB.
 
 **Model liniowy zależności czasu wykonania od liczby obserwacji, liczby grup i biblioteki “nlme”:**
 ```r
@@ -562,20 +562,19 @@ F-statistic: 9.559e+05 on 3 and 295 DF,  p-value: < 2.2e-16
 Co można zapisać jako:
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (mgcv)} = 0.0009893 * X_{L. obserwacji} %2B 4.622">
 
-**Tylko liczba obserwacji ma wpływ na zużycie RAMu przez funkcję "bam()"**. Ponadto, zużycie to jest mniejsze o ok. 40% dla takiej samej liczby obserwacji w porównaniu z biblioteką "lme4" i ok. 60% mniejsze w porównaniu z "nlme".
+**Tylko liczba obserwacji ma wpływ na zużycie RAM-u przez funkcję "bam()"**. Ponadto, zużycie to jest mniejsze o ok. 40% dla takiej samej liczby obserwacji w porównaniu z biblioteką "lme4" i ok. 60% mniejsze w porównaniu z "nlme".
 
-![Zależność użytego RAMu od liczby obserwacji, grup i biblioteki dla języka R](https://i.imgur.com/8hyjClv.png)
-
+![Zależność użytego RAM-u od liczby obserwacji, grup i biblioteki dla języka R](https://i.imgur.com/8hyjClv.png)
 
 
 
 ## 4. Wnioski
-Analizy przeprowadzone nad dużym (milionowym), a także wieloma innymi kombinacjami zbiorów danych dostarczają istotnych spostrzeżeń w zakresie podobieństwa i różnic dla określania tego samego modelu mieszanego, ale z użyciem różnych języków (tu: Python i R) i metod (tu: deklaracja z użyciem formuły i macierzy dla Python i bibliotek "lme4", "nlme" i "mgcv" w R). Trzeba podkreślić, że w dużej mierze nie są ważne liczby, ponieważ zależą one od mocy obliczeniowej komputera, w związku z czym na dwóch różnych maszynach mogą się one całkowicie różnić - z użyciem nawet tego samego bloku instrukcji i działań - **ale na największą uwagę zasługują proporcje między różnymi czynnikami, bo to one właśnie stanowią o możliwościach danej metody/biblioteki.** Ponadto, w niniejszej pracy nacisk położono na nierozbudowany model, tzn. z jednym efektem stałym i jednym losowym, ale z dokładnym zbadaniem wpływu liczby obserwacji i grup (jak i interakcji) na czas konstrukcji modelu i przydział RAMu. Choć nie zostało to szerzej opisane, to wykryto także istotny i duży wpływ liczby parametrów modelu (przede wszystkim efektów losowych) na czas wykonywania - nie zostało to dokładniej sprawdzone ze względu na długi czas oczekiwania konstrukcji jednego zbioru danych o kilkudziesięciu obserwacjach, wynoszącego nawet kilkadziesiąt minut. Podsumowując:
+Analizy przeprowadzone nad dużym (milionowym), a także wieloma innymi kombinacjami zbiorów danych dostarczają istotnych spostrzeżeń w zakresie podobieństwa i różnic dla określania tego samego modelu mieszanego, ale z użyciem różnych języków (tu: Python i R) i metod (tu: deklaracja z użyciem formuły i macierzy dla Python i bibliotek "lme4", "nlme" i "mgcv" w R). Trzeba podkreślić, że w dużej mierze nie są ważne liczby, ponieważ zależą one od mocy obliczeniowej komputera, w związku z czym na dwóch różnych maszynach mogą się one całkowicie różne - z użyciem nawet tego samego bloku instrukcji i działań - **ale na największą uwagę zasługują proporcje między różnymi czynnikami, bo to one właśnie stanowią o możliwościach danej metody/biblioteki.** Ponadto, w niniejszej pracy nacisk położono na nierozbudowany model, tzn. z jednym efektem stałym i jednym losowym, ale z dokładnym zbadaniem wpływu liczby obserwacji i grup (jak i interakcji) na czas konstrukcji modelu i przydział RAM-u. Choć nie zostało to szerzej opisane, to wykryto także istotny i duży wpływ liczby parametrów modelu (przede wszystkim efektów losowych) na czas wykonywania - nie zostało to dokładniej sprawdzone ze względu na długi czas oczekiwania konstrukcji jednego zbioru danych o kilkudziesięciu obserwacjach, wynoszącego nawet kilkadziesiąt minut. Podsumowując:
 
  - **Dla języka Python istotne znaczenie na czas wykonywania modelu ma liczba grup** - wraz ze stopniem złożoności grupowej zbioru, spodziewać się można długiego czasu oczekiwania (rzędu kilkudziesięciu, a nawet kilkuset sekund - jeśli rozpatrywany byłby duży zbiór danych). **Deklaracja modelu za pomocą macierzy wydaje się mieć lepszy wpływ, jeśli chodzi o czas wykonania (tu w minimalnym stopniu) i przydzielaną pamięć operacyjną.**  **Python dostarcza także wartości p dla współczynników i przedziały ufności**, czego nie zapewniają biblioteki "lme4" (wartości p i przedziałów ufności), "nlme" (przedziałów ufności) i "mgcv" (przedziałów ufności). Python jest językiem oszczędnym, jeśli mowa o przydzielanej na dopasowanie modeli pamięci operacyjnej.
  - Dla języka R, podczas analizy względnie małych zbiorów danych (do 200.000) i niskiej złożoności grupowej (do 1.000) warto rozważyć wybór pomiędzy bibliotekami "lme4" a "nlme", ponieważ "mgcv", pomimo użycia fREML, stabilizuje swój czas wykonywania dla obserwacji wynoszących ok. powyżej 300.000. Biblioteka "lme4" miała przewagę nad "nlme" dla niewielkich objętościowo zbiorów danych (do kilku tysięcy) i dużej złożoności grupowej. **Również biblioteka "mgcv" jest oszczędna w kwestii użytkowanej pamięci RAM na konstrukcję modelu, gdzie biblioteka "nlme" zużywa jej najwięcej spośród badanych.** 
 
-Biblioteka "mgcv" w R wydaje się być zatem dobrą alternatywą w zestawieniu z pozostałymi bibliotekami języka R i deklaracji z "statsmodel" języka Python, jeśli analizowany zbiór danych jest duży (od ok. 300.000 obserwacji) lub kiedy występują problemy z pamięcią. Używana metoda estymacji fREML również jest efektywna dla struktur o skomplikowanej złożoności - z wieloma klastrami. Głównym problemem funkcji "bam()" jest jednak nie liczba obserwacji, a parametrów do oszacowania. Pomimo zastosowanej w 4/5 przypadków tej samej metody estymacji (REML) różnice w czasach wykonywania (jak i alokowanej pamięci RAM) wynikają nie tyle, co z weryfikowanych tu liczby obserwacji, grup i możliwe interakcji między czynnikami, a (idąc głębiej) używanej metody optymalizacji. Przykładowo, funkcja "lmer()" z biblioteki "lme4" w R estymuje parametry w oparciu o optymalizacje profilowania log-wiarygodności w odniesieniu do macierzy kowariancji dla efektów losowych. Oznacza to, że wraz ze wzrostem liczby estymowanych parametrów, rozmiar macierzy zostaje równorzędnie zwiększany, a w ostateczności i czas wykonania. Aby znacząco przyspieszyć oczekiwanie, można zmienić ustawienia optymalizatora, np. dla "lme4" w "lmer()" dla:
+Biblioteka "mgcv" w R wydaje się zatem dobrą alternatywą w zestawieniu z pozostałymi bibliotekami języka R i deklaracji z "statsmodel" języka Python, jeśli analizowany zbiór danych jest duży (od ok. 300.000 obserwacji) lub kiedy występują problemy z pamięcią. Używana metoda estymacji fREML również jest efektywna dla struktur o skomplikowanej złożoności - z wieloma klastrami. Głównym problemem funkcji "bam()" jest jednak nie liczba obserwacji, a parametrów do oszacowania. Pomimo zastosowanej w 4/5 przypadków tej samej metody estymacji (REML) różnice w czasach wykonywania (jak i alokowanej pamięci RAM) wynikają nie tyle, ile z weryfikowanych tu liczby obserwacji, grup i możliwe interakcji między czynnikami, a (idąc głębiej) używanej metody optymalizacji. Przykładowo, funkcja "lmer()" z biblioteki "lme4" w R estymuje parametry na podstawie optymalizacji profilowania log-wiarygodności w odniesieniu do macierzy kowariancji dla efektów losowych. Oznacza to, że wraz ze wzrostem liczby estymowanych parametrów, rozmiar macierzy zostaje równorzędnie zwiększany, a w ostateczności i czas wykonania. Aby znacząco przyspieszyć oczekiwanie, można zmienić ustawienia optymalizatora, np. dla "lme4" w "lmer()" dla:
 ```r
 [g]lmerControl(calc.derivs = FALSE)
 ```
