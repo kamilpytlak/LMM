@@ -171,7 +171,7 @@ Bazując na wielu różnych kombinacjach liczby obserwacji-grup sztucznie wygene
 |       50000       |      100     |     0.3971     |    lme4    | 70.4420 |
 |       60000       |      100     |     0.4710     |    lme4    | 83.5720 |
 
-W tej części analizy skupione były wokół modelu liniowego. Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:<br />
+W tej części analizy skupione były wokół modelu liniowego. Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas} = B_{L. obserwacji} * X_{L. obserwacji} %2B B_{L. grup} * X_{L. grup} %2B B_{L.obserwacji:L.grup} * X_{L. obserwacji} * X_{L. grup}">
 
 #### 2.2.1 Python
@@ -298,7 +298,7 @@ Multiple R-squared:  0.936,	Adjusted R-squared:  0.9354
 F-statistic:  1439 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-W przypadku funkcji "lme()" z biblioteki "nlme" również zauważa się dodatnią korelację między liczbą obserwacji a czasem wykonania, a dodatkowo również liczbą grup. Można to przedstawić następującym równaniem:<br />
+W przypadku funkcji "lme()" z biblioteki "nlme" również zauważa się dodatnią korelację między liczbą obserwacji a czasem wykonania, a dodatkowo również liczbą grup. Można to przedstawić następującym równaniem:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas (nlme)} = 0.00001236 * X_{L. obserwacji} %2B 0.0001799 * X_{L. grup} - 3.618">
 
 **Przyrównując do biblioteki "lme4", czas wykonania modelu przy stałej liczbie obserwacji dla obu bibliotek różni się o ok. 40%**. Przewaga biblioteki "lme4" wydaje się widoczna dla małych zbiorów danych - ze względnie niskim stosunkiem liczby grup do liczby obserwacji. **Niemniej, z racji tego, że obserwacji w zbiorze jest na ogół o wiele więcej niż grup, różnice pomiędzy współczynnikami parametru liczby grup każą przypuszczać, że czas wykonywania funkcji z biblioteki "nlme" jest niższy niż "lme4".**
@@ -328,7 +328,7 @@ Multiple R-squared:  0.7779,	Adjusted R-squared:  0.7756
 F-statistic: 344.3 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Funkcja "bam()" z biblioteki "mgcv" funkcjonuje względnie wolno dla małych zbiorów danych (tu wynikł istotny wyraz wolny), aczkolwiek dla dużych zbiorów danych jest ona o wiele efektywniejsza od wszystkich analizowanych tu deklaracji/bibliotek. Można to zapisać następującym równaniem:<br /> 
+Funkcja "bam()" z biblioteki "mgcv" funkcjonuje względnie wolno dla małych zbiorów danych (tu wynikł istotny wyraz wolny), aczkolwiek dla dużych zbiorów danych jest ona o wiele efektywniejsza od wszystkich analizowanych tu deklaracji/bibliotek. Można to zapisać następującym równaniem:<br /><br /> 
 <img src="https://render.githubusercontent.com/render/math?math=y_{Czas (bam)} = 0.000002590 * X_{L. obserwacji} %2B 0.00005936 * X_{L. grup} %2B -0.00000000007902 * X_{L. obserwacji:L. grup} %2B 1.658">
 
 Dla porównania, **przy tej samej liczbie obserwacji (nie uwzględniając grup), czas wykonania jest ok. 5-krotnie mniejszy od bibliotek "lme4" i "nlme".** Uwzględniając grupy (bez uwzględniania liczby obserwacji), czas konstrukcji z użyciem tej biblioteki w porównaniu z biblioteką "nlme" jest ponad 3-krotnie mniejszy.
@@ -407,7 +407,7 @@ Dla każdej z trzech bibliotek RAM oszacowany został z użyciem biblioteki "pro
 ### 3.2 Dla symulacji-kombinacji
 Podobnie jak z czasem wykonywania, aby oszacować zależność pomiędzy liczbą obserwacji, grup, a także liczbą obserwacji i grup w charakterze interakcji, zebrane zostały wartości (w MB) użytego RAM-u na podstawie wielu różnych kombinacji. Dane zostały zgromadzone w pliku "Interakcje": [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv].
 
-Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:<br />
+Rozpatrywany model liniowy z interakcjami można przedstawić następującym równaniem:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec} = B_{L. obserwacji} * X_{L. obserwacji} %2B B_{L. grup} * X_{L. grup} %2B B_{L.obserwacji:L.grup} * X_{L. obserwacji} * X_{L. grup}">
 
 #### 3.2.1 Python
@@ -435,7 +435,7 @@ Multiple R-squared:  0.9324,	Adjusted R-squared:  0.9317
 F-statistic:  1357 on 3 and 295 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać:<br />
+Co można zapisać:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (formula)} = 0.0001263 * X_{L. obserwacji} %2B 0.001652 * X_{L. grup} - 0.000000005871 * X_{L. obserwacji} * X_{L. grup} - 5.454">
 
 **Dla deklaracji formułą wszystkie badane czynniki miały istotny wpływ na użytą pamięć operacyjną**. **Największy wpływ ma liczba grup**: już z 1.000 obserwacji (bez uwzględniania obserwacji) alokacja RAM-u wzrasta o 1.652 sekundy. Z kolei wzrost liczby obserwacji o 100.000 (bez uwzględniania grup) powoduje przyrost zużytego RAM-u o 12.63 sekundy.
@@ -464,7 +464,7 @@ Multiple R-squared:  0.8689,	Adjusted R-squared:  0.8675
 F-statistic: 649.4 on 3 and 294 DF,  p-value: < 2.2e-16
 ```
 
-Co można zapisać:<br />
+Co można zapisać:<br /><br />
 <img src="https://render.githubusercontent.com/render/math?math=y_{Pamiec (macierz)} = 0.00009995 * X_{L. obserwacji} %2B 0.0007433 * X_{L. grup} -0.00000000373 * X_{L. obserwacji} * X_{L. grup} - 0.1263">
 
 Dla deklaracji macierzą również wszystkie badane czynniki mają istotny wpływ na zużycie RAM-u. **W zależności od liczby obserwacji, zużycie jest o ok. 30% mniejsze niż w przypadku deklaracji formułą.** 
