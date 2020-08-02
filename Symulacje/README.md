@@ -1,7 +1,7 @@
 
 # Symulacje
 
-1. [Opis zbiorów danych](#1-opis-zbiorow-danych)
+1. [Opis zbiorów danych](#1-opis-zbiorów-danych)
 2. [Czasy wykonania](#2-czasy-wykonania)
 3. [RAM](#3-ram)
 4. [Wnioski](#4-wnioski)<br />
