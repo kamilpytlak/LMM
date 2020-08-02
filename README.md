@@ -14,7 +14,7 @@ Wybierając pomiędzy językami Python, R i danymi deklaracjami/bibliotekami, na
 	- [Porównanie efektywności, zastostowań i popularności](#porównanie-efektywności-zastostowań-i-popularności)
 	- [Implementacja metod statystycznych](#implementacja-metod-statystycznych)
 3. [Porównanie efektywności algorytmów LMM](#3-porównanie-efektywności-algorytmów-lmm)
-	- [Metodyka](#3-1-metodyka)
+	- [Metodyka](#31-metodyka)
 	- [Wyniki](#wyniki)
 		- [Zbiór danych "cows"](#zbiór-danych-cows)
 			- [Opis zbioru danych](#opis-zbioru-danych)
