@@ -1,4 +1,4 @@
-# Liniowe modele mieszane (MLM): Porównanie efektywności bibliotek w językach Python i R
+# Liniowe modele mieszane (LMM): Porównanie efektywności bibliotek w językach Python i R
 
 
 ## Streszczenie
@@ -6,13 +6,13 @@ W niniejszej pracy porównano efektywność algorytmów konstrukcji mieszanych m
 Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Python i R (p-value < 2e-16), bibliotekami lme4 (R), nlme (R)i bam (R), a także implementacją modelu w postaci formuły i macierzy (Python). Zważywszy na samą liczbę obserwacji, różnice dają się szczególnie zauważyć w przypadku dużych zbiorów danych (już od ok. 250 tys.). Sama liczba grup znacząco wpłynęła na wzrost czasu oczekiwania w przypadku formuły i macierzy w języku Python, natomiast nie zaobserwowano istotnego wzrostu w bibliotekach języka R. Wybierając pomiędzy językami Python, R i danymi bibliotekami, należy zważyć na rozmiar analizowanych danych, liczbę struktur zagnieżdżonych i liczbę efektów stałych.
 
 ## Spis treści
-1. [Liniowe modele w statystyce](#liniowe-modele-w-statystyce)
+1. [Liniowe modele w statystyce](#1-liniowe-modele-w-statystyce)
 	- [Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie](#ogólne-modele-liniowe-glm---estymacja-parametrów-i-zastosowanie)
-	- [Mieszane modele liniowe (MLM) - estymacja parametrów i zastosowanie](#mieszane-modele-liniowe-mlm---estymacja-parametrów-i-zastosowanie)
-2. [Języki Python i R](#języki-python-i-r)
+	- [Mieszane modele liniowe (LMM) - estymacja parametrów i zastosowanie](#mieszane-modele-liniowe-mlm---estymacja-parametrów-i-zastosowanie)
+2. [Języki Python i R](#2-języki-python-i-r)
 	- [Porównanie efektywności, zastostowań i popularności](#porównanie-efektywności-zastostowań-i-popularności)
 	- [Implementacja metod statystycznych](#implementacja-metod-statystycznych)
-3. [Porównanie efektywności algorytmów MLM](#porównanie-efektywności-algorytmów-mlm)
+3. [Porównanie efektywności algorytmów LMM](#3-porównanie-efektywności-algorytmów-lmm)
 	- [Metodyka](#metodyka)
 	- [Wyniki](#wyniki)
 		- [Zbiór danych "cows"](#zbiór-danych-cows)
@@ -26,19 +26,19 @@ Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Pyth
 4. [Wnioski](#4-wnioski)
 
 
-## Liniowe modele w statystyce
+## 1. Liniowe modele w statystyce
 
 ### Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie
 
-### Mieszane modele liniowe (MLM) - estymacja parametrów i zastosowanie
+### Mieszane modele liniowe (LMM) - estymacja parametrów i zastosowanie
 
 
-## Języki Python i R
+## 2. Języki Python i R
 ### Porównanie efektywności, zastostowań i popularności
 ### Impementacja metod statystycznych
 
 
-## Porównanie efektywności algorytmów MLM
+## 3. Porównanie efektywności algorytmów LMM
 ### Metodyka
 Porównania wielkości przeznaczanych zasobów systemowych na konstrukcję modelu zostały w językach Python i R zestawione z użyciem biblioteki "statsmodel" w języku Python (która umożliwia deklarację modelu za pomocą formuły bądź macierzy, więc uwzględniono te dwa aspekty) i bibliotek "lme4", "nlme" i "mgcv" w języku R. Biblioteki "lme4" i "nlme" są wysoce spopularyzowane i używane w celach estymacji współczynników, natomiast biblioteka "mgcv", a w szczególności funkcja "bam()" polecana jest do pracy nad dużymi zbiorami danych, gdyż w przeciwieństwie do "lme4" i "nlme", które do estymacji używają metody REML, ta korzysta z metody fREML (Functional Relationship Estimation by Maximum Likelihood). Sprawdzano średnie różnice czasów wykonywania pomiędzy językami, bibliotekami w obrębie języków i jednego języka, ilości przydzielanego RAMu na proces, a także w charakterze interpretacyjnym obszerność informacji i ich dokładność w rezultatach wywołań.
 
@@ -153,24 +153,24 @@ Szczegółowe analizy (wraz z wynikami) dla zbioru danych "cows" znaleźć możn
 Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wykorzystaniem bibliotek "dplyr", "ggplot2" i "FSA". W oparciu o wykresy pudełkowe, zestawiono czas wykonywania funkcji wszystkich bibliotek i deklaracji obydwu języków, a także pojedyncze dla każdego języka i poszczególnych kombinacji bibliotek. Porównano średnie czasy konstrukcji modelu za pomocą deklaracji formuły i macierzy w języku Python z wykorzystaniem testu Wilcoxona, ponieważ przeprowadzony test Shapiro-Wilka stwierdził, że rozkład wartości deklaracji formuły nie jest normalny. Porównano także średnie czasy wszystkich bibliotek/deklaracji w obrębie dwóch języków, przeprowadzając test Kruskala-Wallisa, a w celu uzyskania szczegółów - Dunneta.
 
 
-## Wyniki
-### Zbiór danych "cows"
+### Wyniki
+#### Zbiór danych "cows"
 
-#### Opis zbioru danych
+##### Opis zbioru danych
 
-#### Czas wykonania
+##### Czas wykonania
 
-#### RAM
-
-
+##### RAM
 
 
-### Symulacje
-#### Opis zbiorów danych
 
-#### Czas wykonania
 
-#### RAM
+#### Symulacje
+##### Opis zbiorów danych
+
+##### Czas wykonania
+
+##### RAM
 
 
 
