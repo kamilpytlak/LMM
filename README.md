@@ -23,7 +23,7 @@ Wykazano, że średnie czasy wykonywania różnią się pomiędzy językami Pyth
 			- [Opis zbiorów danych](#opis-zbiorów-danych)
 			- [Czas wykonania](#czas-wykonania)
 			- [RAM](#ram)
-	4. [Wnioski](#wnioski)
+4. [Wnioski](#wnioski)
 
 
 ## Liniowe modele w statystyce
