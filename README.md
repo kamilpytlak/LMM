@@ -14,7 +14,7 @@ Wybierając pomiędzy językami Python, R i danymi deklaracjami/bibliotekami, na
 	- [Porównanie efektywności, zastostowań i popularności](#porównanie-efektywności-zastostowań-i-popularności)
 	- [Implementacja metod statystycznych](#implementacja-metod-statystycznych)
 3. [Porównanie efektywności algorytmów LMM](#3-porównanie-efektywności-algorytmów-lmm)
-	- [Metodyka](#metodyka)
+	- [Metodyka](#3-1-metodyka)
 	- [Wyniki](#wyniki)
 		- [Zbiór danych "cows"](#zbiór-danych-cows)
 			- [Opis zbioru danych](#opis-zbioru-danych)
@@ -40,7 +40,7 @@ Wybierając pomiędzy językami Python, R i danymi deklaracjami/bibliotekami, na
 
 
 ## 3. Porównanie efektywności algorytmów LMM
-### Metodyka
+### 3.1 Metodyka
 Porównania wielkości przeznaczanych zasobów systemowych na konstrukcję modelu zostały w językach Python i R zestawione z użyciem biblioteki "statsmodel" w języku Python (która umożliwia deklarację modelu za pomocą formuły bądź macierzy, więc uwzględniono te dwa aspekty) i bibliotek "lme4", "nlme" i "mgcv" w języku R. Biblioteki "lme4" i "nlme" są wysoce spopularyzowane i używane w celach estymacji współczynników, natomiast biblioteka "mgcv", a w szczególności funkcja "bam()" polecana jest do pracy nad dużymi zbiorami danych, gdyż w przeciwieństwie do "lme4" i "nlme", które do estymacji używają metody REML, ta korzysta z metody fREML (Functional Relationship Estimation by Maximum Likelihood). Sprawdzano średnie różnice czasów wykonywania pomiędzy językami, bibliotekami w obrębie języków i jednego języka, ilości przydzielanego RAM-u na proces, a także w charakterze interpretacyjnym obszerność informacji i ich dokładność w rezultatach wywołań.
 
 &nbsp;
