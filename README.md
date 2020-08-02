@@ -203,6 +203,8 @@ Następujący model można zatem przedstawić w formie równania:<br />
 
 
 ##### 3.2.2.2 Czas wykonania
+W przypadku jednego zbioru milionowego czasy zebrano w sposób analogiczny, co dla zbioru "cows", tzn. ze 100 powtórzeniami i oszacowaniem średniej arytmetycznej i odchylenia standardowego do 4 miejsc po przecinku. Zostały one zebrane do pliku "LMM_times_BIG_1e6_gam": [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/LMM_times_BIG_1e6_gam.csv](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/1.000.000%20obserwacji/LMM_times_BIG_1e6_gam.csv)<br />
+Czasy dla wielu różnych kombinacji zestawów (z różnymi połączeniami liczby obserwacji i grup) zostały z kolei zebrane do pliku "Interakcje": [https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv](https://github.com/kamilpytlak/LMM/blob/master/Symulacje/Kombinacje/Interakcje.csv). Dla danej obserwacji złożonej z pary liczba obserwacji-liczba grup obliczono czas wykonania jako średnia z 3 niezależnych od siebie pomiarów cząstkowych.
 
 ##### 3.2.2.3 RAM
 
