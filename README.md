@@ -8,35 +8,35 @@ Wybierając pomiędzy językami Python, R i danymi deklaracjami/bibliotekami, na
 
 ## Spis treści
 1. [Liniowe modele w statystyce](#1-liniowe-modele-w-statystyce)
-	- [Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie](#ogólne-modele-liniowe-glm---estymacja-parametrów-i-zastosowanie)
-	- [Mieszane modele liniowe (LMM) - estymacja parametrów i zastosowanie](#mieszane-modele-liniowe-mlm---estymacja-parametrów-i-zastosowanie)
+	- [Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie](#11-ogólne-modele-liniowe-glm---estymacja-parametrów-i-zastosowanie)
+	- [Mieszane modele liniowe (LMM) - estymacja parametrów i zastosowanie](#12-mieszane-modele-liniowe-mlm---estymacja-parametrów-i-zastosowanie)
 2. [Języki Python i R](#2-języki-python-i-r)
-	- [Porównanie efektywności, zastostowań i popularności](#porównanie-efektywności-zastostowań-i-popularności)
-	- [Implementacja metod statystycznych](#implementacja-metod-statystycznych)
+	- [Porównanie efektywności, zastostowań i popularności](#21-porównanie-efektywności-zastostowań-i-popularności)
+	- [Implementacja metod statystycznych](#22-implementacja-metod-statystycznych)
 3. [Porównanie efektywności algorytmów LMM](#3-porównanie-efektywności-algorytmów-lmm)
 	- [Metodyka](#31-metodyka)
 	- [Wyniki](#32-wyniki)
 		- [Zbiór danych "cows"](#321-zbiór-danych-cows)
-			- [Opis zbioru danych](#322-opis-zbioru-danych)
-			- [Czas wykonania](#323-czas-wykonania)
-			- [RAM](#324-ram)
-		- [Symulacje](#symulacje)
-			- [Opis zbiorów danych](#opis-zbiorów-danych)
-			- [Czas wykonania](#czas-wykonania)
-			- [RAM](#ram)
+			- [Opis zbioru danych](#3211-opis-zbioru-danych)
+			- [Czas wykonania](#312-czas-wykonania)
+			- [RAM](#3213-ram)
+		- [Symulacje](#322-symulacje)
+			- [Opis zbiorów danych](#3221-opis-zbiorów-danych)
+			- [Czas wykonania](#3222-czas-wykonania)
+			- [RAM](#3223-ram)
 4. [Wnioski](#4-wnioski)
 
 
 ## 1. Liniowe modele w statystyce
 
-### Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie
+### 1.1 Ogólne modele liniowe (GLM) - estymacja parametrów i zastosowanie
 
-### Mieszane modele liniowe (LMM) - estymacja parametrów i zastosowanie
+### 1.2 Mieszane modele liniowe (LMM) - estymacja parametrów i zastosowanie
 
 
 ## 2. Języki Python i R
-### Porównanie efektywności, zastostowań i popularności
-### Impementacja metod statystycznych
+### 2.1 Porównanie efektywności, zastostowań i popularności
+### 2.2 Impementacja metod statystycznych
 
 
 ## 3. Porównanie efektywności algorytmów LMM
@@ -154,24 +154,24 @@ Szczegółowe analizy (wraz z wynikami) dla zbioru danych "cows" znaleźć możn
 Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wykorzystaniem bibliotek "dplyr", "ggplot2" i "FSA". Na podstawie wykresów pudełkowych zestawiono czas wykonywania funkcji wszystkich bibliotek i deklaracji obydwu języków, a także pojedyncze dla każdego języka i poszczególnych kombinacji bibliotek. Porównano średnie czasy konstrukcji modelu za pomocą deklaracji formuły i macierzy w języku Python z wykorzystaniem testu Wilcoxona, ponieważ przeprowadzony test Shapiro-Wilka stwierdził, że rozkład wartości deklaracji formuły nie jest normalny. Porównano także średnie czasy wszystkich bibliotek/deklaracji w obrębie dwóch języków, przeprowadzając test Kruskala-Wallisa, a w celu uzyskania szczegółów - Dunneta.
 
 
-### 3.2 Wyniki
-#### 3.2.1 Zbiór danych "cows"
+### 3.2.1 Wyniki
+#### 3.2.1.1 Zbiór danych "cows"
 
-##### 3.2.2 Opis zbioru danych
+##### 3.2.1.2 Opis zbioru danych
 
-##### 3.2.3 Czas wykonania
+##### 3.2.1.3 Czas wykonania
 
-##### 3.2.4 RAM
-
-
+##### 3.2.1.4 RAM
 
 
-#### Symulacje
-##### Opis zbiorów danych
 
-##### Czas wykonania
 
-##### RAM
+#### 3.2.2 Symulacje
+##### 3.2.2.1 Opis zbiorów danych
+
+##### 3.2.2.2 Czas wykonania
+
+##### 3.2.2.3 RAM
 
 
 
