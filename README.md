@@ -18,7 +18,7 @@ Wybierając pomiędzy językami Python, R i danymi deklaracjami/bibliotekami, na
 	- [Wyniki](#32-wyniki)
 		- [Zbiór danych "cows"](#321-zbiór-danych-cows)
 			- [Opis zbioru danych](#3211-opis-zbioru-danych)
-			- [Czas wykonania](#312-czas-wykonania)
+			- [Czas wykonania](#3212-czas-wykonania)
 			- [RAM](#3213-ram)
 		- [Symulacje](#322-symulacje)
 			- [Opis zbiorów danych](#3221-opis-zbiorów-danych)
