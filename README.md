@@ -154,14 +154,14 @@ Szczegółowe analizy (wraz z wynikami) dla zbioru danych "cows" znaleźć możn
 Testy statystyczne, jak i wizualizacja wyników zostały sporządzone w R z wykorzystaniem bibliotek "dplyr", "ggplot2" i "FSA". Na podstawie wykresów pudełkowych zestawiono czas wykonywania funkcji wszystkich bibliotek i deklaracji obydwu języków, a także pojedyncze dla każdego języka i poszczególnych kombinacji bibliotek. Porównano średnie czasy konstrukcji modelu za pomocą deklaracji formuły i macierzy w języku Python z wykorzystaniem testu Wilcoxona, ponieważ przeprowadzony test Shapiro-Wilka stwierdził, że rozkład wartości deklaracji formuły nie jest normalny. Porównano także średnie czasy wszystkich bibliotek/deklaracji w obrębie dwóch języków, przeprowadzając test Kruskala-Wallisa, a w celu uzyskania szczegółów - Dunneta.
 
 
-### 3.2.1 Wyniki
-#### 3.2.1.1 Zbiór danych "cows"
+### 3.2 Wyniki
+#### 3.2.1 Zbiór danych "cows"
 
-##### 3.2.1.2 Opis zbioru danych
+##### 3.2.1.1 Opis zbioru danych
 
-##### 3.2.1.3 Czas wykonania
+##### 3.2.1.2 Czas wykonania
 
-##### 3.2.1.4 RAM
+##### 3.2.1.3 RAM
 
 
 
